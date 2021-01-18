@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>CV Javier Casas</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="assets/css/styles.css" rel="stylesheet">
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <script src="assets/js/script.js"></script>
+    <script src="assets/js/jquery-3.5.1.js"></script>
+
+</head>
+
+<body>
+    <header id="header">
+        <div class="center">
+            <!-- LOGO -->
+            <div id="logo">
+                <img src="assets/images/react.svg" class="app-logo" alt="logotigpo" />
+                <span id="brand">
+                    <strong>Javier</strong> Casas Gallego
+                </span>
+            </div>
+            <!-- MENU -->
+            <nav id="menu">
+                <ul>
+                    <li><a href="index.html"><button type="button"
+                                class="btn btn-primary enlaceMenu">Inicio</button></a></li>
+                    <li><button type="button" class="btn btn-primary enlaceMenu" data-bs-toggle="modal"
+                            data-bs-target="#modalDatosPersonales">
+                            Datos personales
+                        </button></li>
+                    <li><a href="#"><button type="button" class="btn btn-primary enlaceMenu">Formulario</button></a>
+                    </li>
+                    </li>
+                    <li><a href="#"><button type="button" class="btn btn-primary enlaceMenu">Tienda</button></a></li>
+                    </li>
+
+                </ul>
+            </nav>
+            <!-- Limpiar flotados-->
+
+    </header>
+
+    <div id="slider" class="slider-small slider-principal">
+        <h1>Curriculum Javier Casas</h1>
+        <h3>Elige un perfil &nbsp;
+            <form>
+                <select class="form-select desplegable" id="perfil" style="width: auto;" onchange="cambioPerfil()">
+                    <option value="0" selected disabled>Selecciona Perfil</option>
+                    <option value="1">Desarrollo Web</option>
+                    <option value="2">Técnico de sistemas</option>
+                </select>
+            </form>
+        </h3>
+    </div>
+    <div class="center">
+        <aside id="sidebar1">
+            <div id="nav-blog" class="sidebar-item">
+                <h3>Redes Sociales</h3>
+                <div id="social">
+                    <div class="twitter">
+                        <a href="#" class="icon">
+                            <img src="assets/images/twitter.png">
+                        </a>
+                        <p class="overlay">
+                            Twitter
+                        </p>
+                    </div>
+                    <div class="facebook">
+                        <a href="#" class="icon">
+                            <img src="assets/images/facebook.png">
+                        </a>
+                        <p class="overlay">
+                            Facebook
+                        </p>
+                    </div>
+                    <div class="youtube">
+                        <a href="#" class="icon">
+                            <img src="assets/images/youtube.png">
+                        </a>
+                        <p class="overlay">
+                            Youtube
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+            <div id="search" class="sidebar-item">
+                <h3>Buscador.</h3>
+                <p>Busca un artículo</p>
+                <form>
+                    <input type="text" name="search">
+                    <input type="submit" name="submit" value="buscar">
+                </form>
+            </div>
+        </aside>
+        <section id="content">
+            <h2>Últimos artículos</h2>
+            <!-- listado artículos-->
+        </section>
+
+    </div>
+    <div class="clearfix"></div>
+    <footer id="footer">
+        <div class="center">
+            <p>&copy; CV Javier Casas Gallego</p>
+        </div>
+    </footer>
+
+    <!-- Modales -->
+    <div class="modal fade" id="modalDatosPersonales" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/bootstrap.js"></script>
+</body>
+
+</html>

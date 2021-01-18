@@ -1,0 +1,13 @@
+@use 'base';
+
+.slider-principal {
+    /* Degradado CSS */
+    background: rgba(76, 76, 76, 1);
+    background: -moz-radial-gradient(center, ellipse cover, rgba(76, 76, 76, 1) 0%, rgba(0, 0, 0, 1) 28%, rgba(17, 17, 17, 1) 50%, rgba(43, 43, 43, 1) 75%, rgba(19, 19, 19, 1) 100%);
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(76, 76, 76, 1)), color-stop(28%, rgba(0, 0, 0, 1)), color-stop(50%, rgba(17, 17, 17, 1)), color-stop(75%, rgba(43, 43, 43, 1)), color-stop(100%, rgba(19, 19, 19, 1)));
+    background: -webkit-radial-gradient(center, ellipse cover, rgba(76, 76, 76, 1) 0%, rgba(0, 0, 0, 1) 28%, rgba(17, 17, 17, 1) 50%, rgba(43, 43, 43, 1) 75%, rgba(19, 19, 19, 1) 100%);
+    background: -o-radial-gradient(center, ellipse cover, rgba(76, 76, 76, 1) 0%, rgba(0, 0, 0, 1) 28%, rgba(17, 17, 17, 1) 50%, rgba(43, 43, 43, 1) 75%, rgba(19, 19, 19, 1) 100%);
+    background: -ms-radial-gradient(center, ellipse cover, rgba(76, 76, 76, 1) 0%, rgba(0, 0, 0, 1) 28%, rgba(17, 17, 17, 1) 50%, rgba(43, 43, 43, 1) 75%, rgba(19, 19, 19, 1) 100%);
+    background: radial-gradient(ellipse at center, rgba(76, 76, 76, 1) 0%, rgba(0, 0, 0, 1) 28%, rgba(17, 17, 17, 1) 50%, rgba(43, 43, 43, 1) 75%, rgba(19, 19, 19, 1) 100%);
+    filter    : progid:DXImageTransform.Microsoft.gradient(startColorstr='#4c4c4c', endColorstr='#131313', GradientType=1);
+}
