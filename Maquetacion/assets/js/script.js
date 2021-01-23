@@ -4,16 +4,26 @@ $(function () {
 function cambioPerfil() {
     var perfilSeleccionado = document.getElementById('perfil').value;
     if (perfilSeleccionado == 1) {
-        window.location.href = "cv-desarrollo.html"
+        window.location.href = "desarrollo-cv.html"
     } else if (perfilSeleccionado == 2) {
-        window.location.href = "cv-helpdesk.html"
+        window.location.href = "helpdesk-cv.html"
     }
 }
 
-$('#botonDatos, #botonDatos1').click(function () {
-    $('#sidebar').fadeToggle('slow');
 
+
+
+
+
+$('#botonDatos, #botonDatos1, #botonDatos2').click(function () {
+    $('#sidebar').fadeToggle('slow');
 });
+
+$('#botonDatosD').click(function () {
+    $('#sidebarD').fadeToggle('slow');
+});
+
+
 $('#tituloFormacion').click(function () {
     $('#formacion').slideToggle('slow');
 });
@@ -57,6 +67,9 @@ for (var i = 1; i <= 5; i++) {
     articles.appendChild(clonado);
 }
 
+$('#html').click(function () {
+    alert("Hola");
+})
 
 
 

@@ -21,34 +21,36 @@
     <header id="header">
         <div class="center">
             <!-- LOGO -->
-            <div id="logo">
-                <img src="assets/images/react.svg" class="app-logo" alt="logotigpo" />
-                <span id="brand">
-                    <strong>Javier</strong> Casas Gallego
-                </span>
-            </div>
+            <a href="index.html" id="linkLogo">
+                <div id="logo">
+                    <img src="assets/images/react.svg" class="app-logo" alt="logotigpo" />
+                    <span id="brand">
+                        <strong>Javier</strong> Casas Gallego
+                    </span>
+                </div>
+            </a>
             <!-- MENU -->
             <nav id="menu">
                 <ul>
                     <li>
-                        <a href="index.html"><button type="button" class="btn btn-primary enlaceMenuH">Inicio</button>
+                        <a href="helpdesk-cv.html"><button type="button"
+                                class="btn btn-primary enlaceMenuH">Inicio</button>
                         </a>
                     </li>
                     <li>
-                        <div id="botonDatos" class="btn btn-primary enlaceMenuH">Datos Personales</div>
+                        <div id="botonDatos1" class="btn btn-primary enlaceMenuH">Datos Personales</div>
                     </li>
                     <!-- <li><button type="button" class="btn btn-primary enlaceMenuH" data-bs-toggle="modal"
                             data-bs-target="#modalDatosPersonales">
                             Datos personales
                         </button>
                     </li> -->
+                    <li><a href="helpdesk-acerca.html">
+                            <button type="button" class="btn btn-primary enlaceMenuH">Acerca de...</button></a>
+                    </li>
                     <li>
                         <div id="botonFormulario" class="btn btn-primary enlaceMenuH" data-bs-toggle="modal"
                             data-bs-target="#modalLogin">Login</div>
-                    </li>
-                    </li>
-                    <li><a href="#"><button type="button" class="btn btn-primary enlaceMenuH">Acerca de...</button></a>
-                    </li>
                     </li>
 
                 </ul>
@@ -117,7 +119,7 @@
                 <hr />
                 <div class="botones">
 
-                    <a href="cv-helpdesk.html#tabs-experiencia">
+                    <a href="helpdesk-cv.html#tabs-experiencia">
                         <div class="volver btn btn-primary"> Volver
                         </div>
                     </a>
@@ -135,6 +137,7 @@
 
 
     <!-- Modales -->
+    <!-- Modal Login -->
     <div class="modal fade" id="modalLogin" tabindex="-1" aria-labelledby="modalDatosPersonalesH" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -157,13 +160,57 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" data-bs-toggle="modal"
+                        data-bs-target="#modalRegistro">Registrar usuario</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <script src="assets/js/bootstrap.js"></script>
+    <!-- Modal Registro de usuario -->
+    <div class="modal fade" id="modalRegistro" tabindex="-1" aria-labelledby="modalRegistroUsuarios" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalRegistroUsuarios">Registro de usuarios</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="nombre" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="username">
+                        </div>
+                        <div class="mb-3">
+                            <label for="apellidos" class="form-label">Apellidos</label>
+                            <input type="text" class="form-control" id="apellidos">
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">email</label>
+                            <input type="email" class="form-control" id="email">
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Contraseña</label>
+                            <input type="password" class="form-control" id="password">
+                        </div>
+                        <div class="mb-3">
+                            <label for="repassword" class="form-label">Confirma la contraseña</label>
+                            <input type="password" class="form-control" id="repassowrd">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button id="botonLogin" type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                        data-bs-toggle="modal" data-bs-target="#modalLogin">Iniciar sesión</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/bootstrap.bundle.js"></script>
 </body>
 <script src="assets/js/script.js"></script>
 

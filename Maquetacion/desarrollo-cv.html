@@ -5,13 +5,12 @@
     <title>CV Javier Casas</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="assets/css/stylesHelpdesk.css" rel="stylesheet">
+    <link href="assets/css/styles.css" rel="stylesheet">
+    <link href="assets/css/stylesDesarrollo.css" rel="stylesheet">
     <link href="assets/css/jquery-ui.css" rel="stylesheet">
     <link href="assets/css/bootstrap.css" rel="stylesheet">
     <script src="assets/js/jquery-3.5.1.js"></script>
     <script src="assets/js/jquery-ui.js"></script>
-
-
 
 </head>
 
@@ -28,25 +27,15 @@
             <!-- MENU -->
             <nav id="menu">
                 <ul>
-                    <li>
-                        <a href="index.html"><button type="button" class="btn btn-primary enlaceMenuH">Inicio</button>
-                        </a>
-                    </li>
-                    <li>
-                        <div id="botonDatos" class="btn btn-primary enlaceMenuH">Datos Personales</div>
-                    </li>
-                    <!-- <li><button type="button" class="btn btn-primary enlaceMenuH" data-bs-toggle="modal"
-                            data-bs-target="#modalDatosPersonales">
+                    <li><a href="index.html"><button type="button"
+                                class="btn btn-primary enlaceMenu">Inicio</button></a></li>
+                    <li><button type="button" id="botonDatosD" class="btn btn-primary enlaceMenu">
                             Datos personales
-                        </button>
-                    </li> -->
-                    <li>
-                        <div id="botonFormulario" class="btn btn-primary enlaceMenuH" data-bs-toggle="modal"
-                            data-bs-target="#modalLogin">Login</div>
+                        </button></li>
+                    <li><a href="#"><button type="button" class="btn btn-primary enlaceMenu">Formulario</button></a>
                     </li>
                     </li>
-                    <li><a href="#"><button type="button" class="btn btn-primary enlaceMenuH">Acerca de...</button></a>
-                    </li>
+                    <li><a href="#"><button type="button" class="btn btn-primary enlaceMenu">Tienda</button></a></li>
                     </li>
 
                 </ul>
@@ -55,20 +44,19 @@
             <div class="clearfix" </div>
 
     </header>
+
     <!-- Banner superior -->
-    <div id="slider" class="slider-small slider-helpdesk">
-        <div class="textoSlider">
-            <h1>Curriculum Javier Casas</h1>
-            <h3>Perfil - Técnico de soporte</h3>
-        </div>
+    <div id="slider" class="slider-small slider-desarrollo">
+        <h1>Curriculum Javier Casas</h1>
+        <h3>Perfil - Desarrollo Web</h3>
     </div>
 
-    <!-- Fin Banner Superior -->
+    <!-- Fin banner superior -->
 
     <!-- Barra lateral -->
     <div class="center">
         <aside>
-            <div id="sidebar">
+            <div id="sidebarD">
                 <div class="sidebarizq">
                     <div id="avatar"><img src="assets/images/avatar.png"></div>
                     <span class="lateral">Nombre: </span> Javier Casas Gallego<br />
@@ -124,7 +112,7 @@
                 <div id="tabs-experiencia">
                     <div id="articles">
                         <section class="experiencia-item" id="experiencia-template">
-                            <a href="detalleTrabajo.html">
+                            <a href="helpdesk-detalleTrabajo.html">
                                 <div class="titulo-trabajo">
                                     <span id="periodo" class="periodo">feb 2008 - may 2020</span>
                                     <div class="clearfix"></div>
@@ -238,31 +226,16 @@
     </div>
 
 
-
-
-
-
-
-    <!-- Modales -->
-    <div class="modal fade" id="modalLogin" tabindex="-1" aria-labelledby="modalDatosPersonalesH" aria-hidden="true">
+    <div class="modal fade" id="modalDatosPersonales" tabindex="-1" aria-labelledby="modalDatosPersonalesD"
+        aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Desarrollo</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
-                        <div class="mb-3">
-                            <label for="username" class="form-label">Usuario</label>
-                            <input type="email" class="form-control" id="username">
-                        </div>
-                        <div class="mb-3">
-                            <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="password">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
+                    ...
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -272,7 +245,7 @@
         </div>
     </div>
 
-    <script src="assets/js/bootstrap.js"></script>
+    <script src="assets/js/bootstrap.bundle.js"></script>
 </body>
 <script src="assets/js/script.js"></script>
 

@@ -65,6 +65,9 @@ $sombraTexto: 0px 0px 2px $color;
 
 
 #menu {
+    height     : 125px;
+    align-items: center;
+
     .enlaceMenuH {
         border         : none;
         background     : none;
@@ -73,6 +76,7 @@ $sombraTexto: 0px 0px 2px $color;
         transition     : 500ms all;
         font-size      : 22px;
         outline        : none;
+
     }
 
     .enlaceMenuH:hover {
@@ -83,12 +87,17 @@ $sombraTexto: 0px 0px 2px $color;
 
 }
 
-#sidebar {
+#sidebar,
+#sidebar1 {
     width      : 25%;
     float      : left;
     margin     : 10px;
     display    : none;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+#divPrueba {
+    display: none;
 }
 
 
@@ -127,6 +136,7 @@ $sombraTexto: 0px 0px 2px $color;
 }
 
 #periodo {
+    padding: 5px;
     display: block;
     float  : left;
     color  : $color;
@@ -146,7 +156,7 @@ $sombraTexto: 0px 0px 2px $color;
 }
 
 #tabs-experiencia {
-    #experiencia {
+    #articles {
         ul {
             text-align         : center;
             list-style-position: inside;
@@ -154,6 +164,29 @@ $sombraTexto: 0px 0px 2px $color;
             display            : inline-block;
             text-align         : left;
         }
+
+        .experiencia-item {
+            transition: 500ms;
+
+            a {
+                text-decoration: none;
+            }
+
+            a:hover {
+                text-decoration: none;
+                color          : #444;
+            }
+        }
+
+
+        .experiencia-item:hover {
+            transform       : scale(1.02, 1.02);
+            box-shadow      : 10px 10px 10px #ce7575;
+            border-radius   : 10px;
+            background-color: #d3b2b2;
+            cursor          : pointer;
+        }
+
     }
 
 }
@@ -215,5 +248,4 @@ $sombraTexto: 0px 0px 2px $color;
     display       : flex;
     flex-direction: row-reverse;
 
-    .volver {}
 }

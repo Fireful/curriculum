@@ -7,16 +7,6 @@ body {
   -moz-osx-font-smoothing: antialiased;
 }
 
-#linkLogo:link {
-  color: black;
-  transition: 400ms all;
-}
-
-#linkLogo:hover {
-  color: red;
-  text-shadow: 0px 0px 10px black;
-}
-
 .acerca {
   margin-bottom: 20px;
 }
@@ -353,17 +343,12 @@ footer {
   color: #ce1e1e;
 }
 
-#sidebar,
-#sidebar1 {
+#sidebar {
   width: 25%;
   float: left;
   margin: 10px;
   display: none;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
-}
-
-#divPrueba {
-  display: none;
 }
 
 #tituloForm-academica,
@@ -406,7 +391,6 @@ footer {
 }
 
 #periodo {
-  padding: 5px;
   display: block;
   float: left;
   color: #ce1e1e;
@@ -430,29 +414,12 @@ footer {
   border-radius: 10px;
 }
 
-#tabs-experiencia #articles ul {
+#tabs-experiencia #experiencia ul {
   text-align: center;
   list-style-position: inside;
   margin: auto;
   display: inline-block;
   text-align: left;
-}
-#tabs-experiencia #articles .experiencia-item {
-  transition: 500ms;
-}
-#tabs-experiencia #articles .experiencia-item a {
-  text-decoration: none;
-}
-#tabs-experiencia #articles .experiencia-item a:hover {
-  text-decoration: none;
-  color: #444;
-}
-#tabs-experiencia #articles .experiencia-item:hover {
-  transform: scale(1.02, 1.02);
-  box-shadow: 10px 10px 10px #ce7575;
-  border-radius: 10px;
-  background-color: #d3b2b2;
-  cursor: pointer;
 }
 
 .sidebarizq {
@@ -523,5 +490,34 @@ footer {
   display: flex;
   flex-direction: row-reverse;
 }
+body {
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  text-align: center;
+}
 
-/*# sourceMappingURL=stylesHelpdesk.css.map */
+.acerca {
+  border-bottom: 3px dashed red;
+}
+
+.tecnologias {
+  display: grid;
+  /* Espacio entre elementod grid */
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  border: 1px solid #ca3535;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 10px #995656;
+  padding: 10px;
+}
+
+.tec {
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 1px gray;
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  padding: 20px;
+  background: gray;
+}
+
+/*# sourceMappingURL=stylesDev-acerca.css.map */

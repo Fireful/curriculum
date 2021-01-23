@@ -7,8 +7,34 @@ body {
     -moz-osx-font-smoothing: antialiased;
 }
 
+#linkLogo:link {
+    color     : black;
+    transition: 400ms all;
+}
+
+#linkLogo:hover {
+    color: red;
+
+    text-shadow: 0px 0px 10px black;
+}
+
+
+.acerca {
+    h1 {
+        text-align: center;
+    }
+
+    h2 {
+        text-align: center;
+
+    }
+
+
+    margin-bottom: 20px;
+}
+
 .center {
-    width : 85%;
+    width : 75%;
     margin: 0px auto;
 }
 
@@ -58,15 +84,16 @@ body {
 }
 
 #menu {
-    display  : flex;
-    width    : 50%;
-    font-size: 20px;
-    float    : right;
+    display       : flex;
+    width         : 50%;
+    font-size     : 20px;
+    flex-direction: row;
+    float         : right;
+    align-items   : center;
 
     ul {
 
         width: 100%;
-
 
         li {
             display: inline;
