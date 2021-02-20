@@ -1,20 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 
-declare var $:any;
+declare var $: any;
+var i: number = 0;
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.scss']
+  styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent implements OnInit {
-
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
     /* Jquery */
-    $('#botonDatos').click(function(){
-      $('.sidebarizq').fadeToggle('slow');
-    })
+    $('#botonDatos').click(function () {
+      $('.sidebarizq').fadeIn('slow');
+    });
   }
-
 }

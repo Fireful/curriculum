@@ -84,6 +84,21 @@ $sombraTexto: 0px 0px 2px $color;
     background: linear-gradient(rgba(232, 75, 75, 1) 0%, rgba(255, 255, 255, 1) 100%);
 }
 
+#menu {
+    a:hover,
+    .active {
+        color: $color;
+        border-bottom: 5px solid $color;
+    }
+    ul {
+        li:hover {
+            transform: scale(1.2, 1.2);
+            text-shadow: 2px 2px 2px $color;
+            color: $color;
+        }
+    }
+}
+
 .enlaceMenuH:hover {
     transform: scale(1.2, 1.2);
     text-shadow: 2px 2px 2px $color;
@@ -201,21 +216,22 @@ $sombraTexto: 0px 0px 2px $color;
             text-align: left;
         }
         .experiencia-item {
-            transition: 500ms;
+            transition: all 1s;
             a {
                 text-decoration: none;
+                color: #291f52;
             }
             a:hover {
                 text-decoration: none;
-                color: #444;
+                color: #cfcece;
             }
         }
         .experiencia-item:hover {
             transform: scale(1.02, 1.02);
-            box-shadow: 10px 10px 10px #ce7575;
             border-radius: 10px;
-            background-color: #d3b2b2;
             cursor: pointer;
+            background: #945b5b;
+            color: white;
         }
     }
 }

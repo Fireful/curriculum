@@ -1,0 +1,18 @@
+<!-- Slider -->
+<app-slider [nombre]="'Películas'" [size]="'small'"></app-slider>
+<div class="center">
+
+    <section id="content">
+
+        <h2>Listado de películas</h2>
+        <div id="articulos" *ngIf="peliculas">
+            <div *ngFor="let pelicula of peliculas">
+                <app-pelicula [pelicula]='pelicula'>
+                </app-pelicula>
+            </div>
+        </div>
+    </section>
+    <app-sidebar></app-sidebar>
+</div>
+
+<!-- Fin Slider -->

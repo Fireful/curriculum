@@ -1,59 +1,65 @@
+<app-slider [nombre]="'Acerca De...'" [size]="'small'"></app-slider>
 <div class="center">
-    <div class="acerca">
-        <h1>Acerca de este currículum</h1>
-        <h2>Este curriculum web se ha realizado utilizando las siguientes tecnologías</h2>
-    </div>
-    <div class="tecnologias">
-        <div class="tec1">
-            <img src="assets/images/acerca/html5.png">
+
+    <section id="content">
+        <div class="center">
+            <div class="acerca">
+                <h1>Acerca de este currículum</h1>
+                <h2>Este curriculum web se ha realizado utilizando las siguientes tecnologías {{nombre}}</h2>
+            </div>
+            <div class="tecnologias">
+                <div class="tec1">
+                    <img src="assets/images/acerca/html5.png">
+                </div>
+                <div class="tec1">
+                    <img src="assets/images/acerca/javascript.png">
+                </div>
+                <div class="tec1">
+                    <img src="assets/images/acerca/sass.png">
+                </div>
+                <div class="tec1">
+                    <img src="assets/images/acerca/css3.png">
+                </div>
+                <div class="tec1">
+                    <img src="assets/images/acerca/less.png">
+                </div>
+                <div class="tec1">
+                    <img src="assets/images/acerca/bootstrap.png">
+                </div>
+                <div class="tec1">
+                    <img src="assets/images/acerca/flexbox.png">
+                </div>
+                <div class="tec1">
+                    <img src="assets/images/acerca/grid.png">
+                </div>
+                <div class="tec1">
+                    Responsive Web Design
+                </div>
+                <div class="tec1">
+                    JQUERY
+                </div>
+                <div class="tec1">
+                    JQUERY-UI
+                </div>
+                <div class="tec1">
+                    MONGODB
+                </div>
+                <div class="tec1">
+                    NodeJS
+                </div>
+                <div class="tec1">
+                    REACT
+                </div>
+                <div class="tec1">
+                    ANGULAR
+                </div>
+                <div class="tec1">
+                    VUE
+                </div>
+            </div>
         </div>
-        <div class="tec1">
-            <img src="assets/images/acerca/html5.png">
-        </div>
-        <div class="tec1">
-            <img src="assets/images/acerca/javascript.png">
-        </div>
-        <div class="tec1">
-            <img src="assets/images/acerca/sass.png">
-        </div>
-        <div class="tec1">
-            <img src="assets/images/acerca/css3.png">
-        </div>
-        <div class="tec1">
-            <img src="assets/images/acerca/less.png">
-        </div>
-        <div class="tec1">
-            <img src="assets/images/acerca/bootstrap.png">
-        </div>
-        <div class="tec1">
-            <img src="assets/images/acerca/flexbox.png">
-        </div>
-        <div class="tec1">
-            <img src="assets/images/acerca/grid.png">
-        </div>
-        <div class="tec1">
-            Responsive Web Design
-        </div>
-        <div class="tec1">
-            JQUERY
-        </div>
-        <div class="tec1">
-            JQUERY-UI
-        </div>
-        <div class="tec1">
-            MONGODB
-        </div>
-        <div class="tec1">
-            NodeJS
-        </div>
-        <div class="tec1">
-            REACT
-        </div>
-        <div class="tec1">
-            ANGULAR
-        </div>
-        <div class="tec1">
-            VUE
-        </div>
-    </div>
+    </section>
+    <app-sidebar></app-sidebar>
 </div>
+
+<!-- Fin Slider -->

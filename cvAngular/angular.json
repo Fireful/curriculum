@@ -30,7 +30,11 @@
                         "styles": [
                             "node_modules/bootstrap/dist/css/bootstrap.min.css",
                             "src/assets/css/stylesDeveloper.scss",
-                            "src/assets/css/stylesDeveloperAcerca.scss"
+                            "src/assets/css/stylesDeveloperAcerca.scss",
+                            "src/assets/css/stylesDeveloperCV.scss",
+                            "src/assets/css/stylesPortfolio.scss"
+
+
 
 
                         ],
@@ -97,9 +101,22 @@
                             "src/assets"
                         ],
                         "styles": [
-                            "src/styles.scss"
+                            "node_modules/bootstrap/dist/css/bootstrap.min.css",
+                            "src/assets/css/stylesDeveloper.scss",
+                            "src/assets/css/stylesDeveloperAcerca.scss",
+                            "src/assets/css/stylesDeveloperCV.scss",
+                            "src/assets/css/stylesPortfolio.scss"
+
+
+
+
                         ],
-                        "scripts": []
+                        "scripts": [
+                            "node_modules/jquery/dist/jquery.min.js",
+                            "node_modules/@popperjs/core/dist/umd/popper.min.js",
+                            "node_modules/bootstrap/dist/js/bootstrap.min.js"
+
+                        ]
                     }
                 },
                 "lint": {

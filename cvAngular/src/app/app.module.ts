@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import{routing, appRoutingProviders} from './app.routing';
+import { routing, appRoutingProviders } from './app.routing';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -14,6 +14,10 @@ import { PortfolioComponent } from './components/portfolio/portfolio.component';
 import { CvComponent } from './components/cv/cv.component';
 import { HomeComponent } from './components/home/home.component';
 import { ErrorComponent } from './components/error/error.component';
+import { DetalleComponent } from './components/detalle/detalle.component';
+import { PeliculasComponent } from './components/peliculas/peliculas.component';
+import { LoginComponent } from './components/login/login.component';
+import { PeliculaComponent } from './components/pelicula/pelicula.component';
 
 @NgModule({
   declarations: [
@@ -27,14 +31,14 @@ import { ErrorComponent } from './components/error/error.component';
     PortfolioComponent,
     CvComponent,
     HomeComponent,
-    ErrorComponent
+    ErrorComponent,
+    DetalleComponent,
+    PeliculasComponent,
+    LoginComponent,
+    PeliculaComponent,
   ],
-  imports: [
-    BrowserModule,
-    NgbModule,
-    routing
-  ],
+  imports: [BrowserModule, NgbModule, routing],
   providers: [appRoutingProviders],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

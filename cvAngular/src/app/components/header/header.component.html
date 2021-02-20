@@ -13,28 +13,32 @@
         <nav id="menu">
             <ul>
                 <li>
-                    <a [routerLink]="['/home']">
-                        <button type="button" class="btn btn-primary enlaceMenuH">Inicio</button>
-                    </a>
+                    <a [routerLink]="['/home']" [routerLinkActive]="[ 'active']">Inicio
+          </a>
                 </li>
                 <li>
-                    <a [routerLink]="['/cv']">
-                        <button type="button" class="btn btn-primary enlaceMenuH">CV</button></a>
+                    <a [routerLink]="['/cv']" [routerLinkActive]="[ 'active']">CV
+          </a>
                 </li>
 
                 <li>
-                    <div id="botonDatos" class="btn btn-primary enlaceMenuH">Datos Personales</div>
+                    <a id="botonDatos">Datos Personales</a>
                 </li>
                 <li>
-                    <a [routerLink]="['/portfolio']">
-                        <button type="button" class="btn btn-primary enlaceMenuH">Portfolio</button></a>
+                    <a [routerLink]="['/portfolio']" [routerLinkActive]="[ 'active']">Portfolio
+          </a>
                 </li>
                 <li>
-                    <a [routerLink]="['/acerca']">
-                        <button type="button" class="btn btn-primary enlaceMenuH">Acerca de...</button></a>
+                    <a [routerLink]="['/acerca']" [routerLinkActive]="[ 'active']">Acerca
+            de...
+          </a>
                 </li>
                 <li>
-                    <div id="botonFormulario" class="btn btn-primary enlaceMenuH" (click)="openLogin(modalLogin)">Login</div>
+                    <a id="botonFormulario" (click)="openLogin(modalLogin)" [routerLink]="['/login']" [routerLinkActive]="['active']">Login</a>
+                </li>
+                <li>
+                    <a [routerLink]="['/peliculas']" [routerLinkActive]="[ 'active']">Películas
+          </a>
                 </li>
 
             </ul>

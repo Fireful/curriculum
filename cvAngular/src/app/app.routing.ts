@@ -7,6 +7,10 @@ import { HomeComponent } from './components/home/home.component';
 import { CvComponent } from './components/cv/cv.component';
 import { PortfolioComponent } from './components/portfolio/portfolio.component';
 import { AcercaComponent } from './components/acerca/acerca.component';
+import { DetalleComponent } from './components/detalle/detalle.component';
+import { LoginComponent } from './components/login/login.component';
+import { PeliculasComponent } from './components/peliculas/peliculas.component';
+
 import { ErrorComponent } from './components/error/error.component';
 
 //Array de rutas
@@ -16,6 +20,10 @@ const appRoutes: Routes = [
   { path: 'cv', component: CvComponent },
   { path: 'portfolio', component: PortfolioComponent },
   { path: 'acerca', component: AcercaComponent },
+  { path: 'acerca/:nombre', component: AcercaComponent },
+  { path: 'detalle', component: DetalleComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'peliculas', component: PeliculasComponent },
   { path: '**', component: ErrorComponent },
 ];
 
