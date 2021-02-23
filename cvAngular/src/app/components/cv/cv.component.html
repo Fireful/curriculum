@@ -17,11 +17,15 @@
                 </div>
                 <div class="clearfix"></div>
                 <div id="form-academica">
-                    <span id="periodo" class="periodo">sep 2018 - dic 2020</span>
-                    <div class="clearfix"></div>
-                    <span id="centro">I.E.S. Vista Alegre</span>
-                    <div class="clearfix"></div>
-                    <span id="curso">C.F.G.S. Desarrollo de Aplicaciones Web</span>
+                    <div *ngFor="let formacion of formaciones let i=index;" class="formaciones">
+
+                        <app-formacion [formacion]="formacion">
+
+                        </app-formacion>
+
+
+                    </div>
+
                     <div class="clearfix"></div>
                 </div>
                 <div class="clearfix"></div>
@@ -30,42 +34,29 @@
                 </div>
                 <div class="clearfix"></div>
                 <div id="otra-formacion">
+                    <div *ngFor="let curso of cursos let i=index;" class="formaciones">
+
+                        <app-curso [curso]="curso">
+
+                        </app-curso>
+
+
+                    </div>
                     <div class="curso" *ngFor="let formacion of formaciones">
                         <div class="clearfix"></div>
-                        <h2>{{formacion.titulo}}.jpg</h2>
-                        <article>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto eaque corporis tenetur voluptatem facere. A veritatis ratione deserunt eveniet. Laboriosam quasi at, vero nemo recusandae dolores illo placeat dicta veritatis omnis? Architecto repellat
-                            quas quasi aliquam esse natus nam magnam incidunt voluptatem nesciunt, commodi ratione provident sed error excepturi ducimus dolorum nisi libero corrupti. Dolores ullam quasi, repellendus perspiciatis velit ea nobis fugiat
-                            ipsa? Magni perferendis doloremque est eum quo itaque eveniet assumenda ratione illo sed repellendus ipsa beatae cum, amet, omnis illum. Ratione, labore tempore, consequatur obcaecati non quas amet cum omnis quidem commodi
-                            et quaerat inventore fuga magni animi laboriosam minima molestiae eum aliquam rem laudantium! Non vitae magnam doloribus? Similique consequatur natus iure. Omnis iste doloribus sequi!
-                        </article>
 
-                        <button class="btn btn bg-primary float-left" (click)="openCertificado(modalCertificado,1)">Ver
-              certificado</button>
                     </div>
                 </div>
 
             </div>
             <div id="tabs-experiencia">
-                <div id="articles">
-                    <section class="experiencia-item" id="experiencia-template">
+                <div id="articles" *ngIf="trabajos">
+                    <div *ngFor="let trabajo of trabajos let i=index;">
+                        <app-trabajo [trabajo]="trabajo">
 
-                        <div class="titulo-trabajo" id="titulo-trabajo">
-                            <span id="periodo" class="periodo">feb 2008 - may 2020</span>
-                            <div class="clearfix"></div>
-                            <h2 id="empresa">melit Technology</h2>
-                        </div>
+                        </app-trabajo>
+                    </div>
 
-
-                        <div class="clearfix"></div>
-                        <a [routerLink]="['/detalle']">
-                            <article class="descTrabajo" id="descTrabajo">Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante, ut pharetra massa metus id nunc. Duis scelerisque molestie turpis. Sed fringilla, massa eget luctus malesuada, metus eros molestie lectus, ut tempus
-                                eros massa ut dolor. Aenean aliquet fringilla sem. Suspendisse sed ligula in ligula suscipit aliquam. Praesent in eros vestibulum mi adipiscing adipiscing. Morbi facilisis. Curabitur ornare consequat nunc. Aenean vel metus.
-                                Ut posuere viverra nulla. Aliquam erat volutpat. Pellentesque convallis. Maecenas feugiat, tellus pellentesque pretium posuere, felis lorem euismod felis, eu ornare leo nisi vel felis. Mauris consectetur tortor et purus.
-                            </article>
-                        </a>
-                        <hr />
-                    </section>
                     <!-- AÑADIR ARTÍCULOS VÍA JS -->
                 </div>
 
@@ -128,11 +119,7 @@
 
         <!-- listado artículos-->
 
-        <!-- Modales -->
-        <!-- Modal Certificado -->
-        <ng-template #modalCertificado let-modal>
-            <img src="../../../assets/images/certificados/css.jpg" />
-        </ng-template>
+
 
     </section>
     <app-sidebar></app-sidebar>

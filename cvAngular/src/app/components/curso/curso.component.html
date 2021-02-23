@@ -1,0 +1,18 @@
+<h2>{{curso.nombre}}</h2>
+<article>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto eaque corporis tenetur voluptatem facere. A veritatis ratione deserunt eveniet. Laboriosam quasi at, vero nemo recusandae dolores illo placeat dicta veritatis omnis? Architecto repellat
+    quas quasi aliquam esse natus nam magnam incidunt voluptatem nesciunt, commodi ratione provident sed error excepturi ducimus dolorum nisi libero corrupti. Dolores ullam quasi, repellendus perspiciatis velit ea nobis fugiat ipsa? Magni perferendis
+    doloremque est eum quo itaque eveniet assumenda ratione illo sed repellendus ipsa beatae cum, amet, omnis illum. Ratione, labore tempore, consequatur obcaecati non quas amet cum omnis quidem commodi et quaerat inventore fuga magni animi laboriosam
+    minima molestiae eum aliquam rem laudantium! Non vitae magnam doloribus? Similique consequatur natus iure. Omnis iste doloribus sequi!
+</article>
+
+<button class="btn btn-primary" (click)="openCertificado(modalCertificado,1)" aria-label="home">Ver Certificado
+</button>
+<hr>
+
+
+<!-- Modales -->
+<!-- Modal Certificado -->
+<ng-template #modalCertificado let-modal>
+    <img src="../../../assets/images/{{curso.imagen}}" />
+</ng-template>

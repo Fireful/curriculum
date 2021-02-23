@@ -1,4 +1,4 @@
-export class Trabajo {
+export class Curso {
   /* public titulo: string;
   public year: number;
   public image: string;
@@ -10,9 +10,11 @@ export class Trabajo {
   } */
   constructor(
     public id,
-    public empresa: string,
+    public nombre,
+    public centro: string,
     public inicio: Date,
     public fin: Date,
-    public descripcion: string
+    public info: string,
+    public imagen: string
   ) {}
 }

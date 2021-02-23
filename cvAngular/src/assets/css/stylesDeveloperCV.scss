@@ -2,8 +2,10 @@
     text-align: left;
 }
 
-#descTrabajo {
-    display: none;
+@for $k from 1 to 50 {
+    #descTrabajo {
+        display: none;
+    }
 }
 
 .titulo-trabajo {

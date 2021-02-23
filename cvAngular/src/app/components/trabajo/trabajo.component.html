@@ -1,0 +1,14 @@
+<section class="experiencia-item" id="experiencia-template">
+
+    <div class="titulo-trabajo{{trabajo.id}}" id="titulo-trabajo">
+        <span id="periodo" class="periodo">{{trabajo.inicio| date:'MMMM YYYY'}} - {{trabajo.fin|date:'MMMM YYYY'}}</span>
+        <div class="clearfix"></div>
+        <h2 id="empresa">{{trabajo.empresa}}{{trabajo.id}}</h2>
+    </div>
+    <div class="clearfix"></div>
+    <a [routerLink]="['/detalle/id']">
+        <article class="descTrabajo" id="descTrabajo{{trabajo.id}}">{{trabajo.descripcion}}
+        </article>
+    </a>
+    <hr />
+</section>

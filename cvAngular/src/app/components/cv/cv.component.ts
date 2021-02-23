@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { Curso } from 'src/app/models/curso';
+import { Formacion } from 'src/app/models/formacion';
+import { Trabajo } from 'src/app/models/trabajo';
 
 declare var $: any;
 @Component({
@@ -9,52 +11,79 @@ declare var $: any;
 })
 export class CvComponent implements OnInit {
   public titulo: string;
+  public trabajos: Trabajo[];
+  public i: number = 1;
+  public j: number = 1;
   closeResult = '';
-  public formaciones: Array<any>;
-  constructor(private modalService: NgbModal) {
+  public formaciones: Formacion[];
+  public cursos: Curso[];
+  constructor() {
     this.titulo = 'Curriculum Vitae';
+
+    this.trabajos = [
+      new Trabajo(
+        this.i,
+        'Melit',
+        new Date('10/05/2020'),
+        new Date('12/25/2020'),
+        'Trabajo con Angular'
+      ),
+      new Trabajo(
+        (this.i += 1),
+        'Web Financial Group',
+        new Date('12/05/2012'),
+        new Date('08/10/2015'),
+        'Trabajo con Angular'
+      ),
+    ];
     this.formaciones = [
-      {
-        id: 1,
-        titulo: 'css',
-        texto: 'Texto del curso 1',
-      },
-      {
-        id: 2,
-        titulo: 'Titulo del curso 2',
-        texto: 'Texto del curso 2',
-      },
+      new Formacion(
+        this.i,
+        'C.F.G.S. Desarrollo de Aplicaciones Web',
+        'I.E.S. Vista Alegre',
+        new Date('09/10/2018'),
+        new Date('07/25/2020'),
+        'Texto del curso 1',
+        ''
+      ),
+      new Formacion(
+        (this.i += 1),
+        'C.F.G.S. Administración de Sistemas Informáticos',
+        'I.E.S. Leonardo da Vinci',
+        new Date('09/10/2002'),
+        new Date('07/25/2004'),
+        'Texto del curso 2',
+        ''
+      ),
+    ];
+    this.cursos = [
+      new Curso(
+        this.i,
+        'C.F.G.S. Desarrollo de Aplicaciones Web',
+        'I.E.S. Vista Alegre',
+        new Date('09/10/2018'),
+        new Date('07/25/2020'),
+        'Texto del curso 1',
+        ''
+      ),
+      new Curso(
+        (this.i += 1),
+        'Master en CSS',
+        'Udemy - Victor Robles Web',
+        new Date('09/10/2002'),
+        new Date('07/25/2004'),
+        'Texto del curso 2',
+        'certificados/css.jpg'
+      ),
     ];
   }
 
-  openCertificado(modalCertificado, id) {
-    this.modalService.dismissAll();
-    this.modalService
-      .open(modalCertificado, { ariaLabelledBy: 'modal-basic-title' })
-      .result.then(
-        (result) => {
-          this.closeResult = `Closed with: ${result}`;
-        },
-        (reason) => {
-          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-        }
-      );
-  }
-
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
-    }
-  }
-
   ngOnInit(): void {
-    $('#titulo-trabajo').click(function () {
-      $('#descTrabajo').slideToggle('slow');
-    });
+    for (var j = 1; j < this.trabajos.length; j++) {
+      $('#titulo-trabajo' + j).click(function () {
+        $('#descTrabajo' + j).slideToggle('slow');
+      });
+    }
     $('#tab1').click(function () {
       $('#tabs-formacion').slideDown('slow');
       $('#tabs-experiencia').slideUp('slow');
