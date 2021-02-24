@@ -64,13 +64,10 @@
             </div>
 
             <div id="tabs-conocimientos">
-                <div class="conocimiento">
-                    <span class="conocimiento-item">
-            Javascript
-          </span>
-                    <div class="progress">
-                        <div value=25 class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow=25 aria-valuemin="0" aria-valuemax="100">25%</div>
-                    </div>
+                <div *ngFor="let conocimiento of conocimientos">
+                    <app-conocimiento [conocimiento]='conocimiento'>
+                    </app-conocimiento>
+                    <div class="clearfix"></div>
                 </div>
                 <div class="clearfix"></div>
                 <div class="conocimiento">
@@ -79,7 +76,6 @@
           </span>
 
                     <div class="progress">
-
                         <div class="progress-bar" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">75%</div>
                     </div>
                 </div>

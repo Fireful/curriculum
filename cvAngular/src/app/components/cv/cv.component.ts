@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Conocimiento } from 'src/app/models/conocimiento';
 import { Curso } from 'src/app/models/curso';
 import { Formacion } from 'src/app/models/formacion';
 import { Trabajo } from 'src/app/models/trabajo';
@@ -12,24 +13,27 @@ declare var $: any;
 export class CvComponent implements OnInit {
   public titulo: string;
   public trabajos: Trabajo[];
-  public i: number = 1;
-  public j: number = 1;
+  public idTrabajo: number = 1;
+  public idFormacion: number = 1;
+  public idConocimiento: number = 1;
+  public idCurso: number = 1;
   closeResult = '';
   public formaciones: Formacion[];
   public cursos: Curso[];
+
+  public conocimientos: Conocimiento[];
   constructor() {
     this.titulo = 'Curriculum Vitae';
-
     this.trabajos = [
       new Trabajo(
-        this.i,
+        this.idTrabajo,
         'Melit',
         new Date('10/05/2020'),
         new Date('12/25/2020'),
         'Trabajo con Angular'
       ),
       new Trabajo(
-        (this.i += 1),
+        (this.idTrabajo += 1),
         'Web Financial Group',
         new Date('12/05/2012'),
         new Date('08/10/2015'),
@@ -38,7 +42,7 @@ export class CvComponent implements OnInit {
     ];
     this.formaciones = [
       new Formacion(
-        this.i,
+        this.idFormacion,
         'C.F.G.S. Desarrollo de Aplicaciones Web',
         'I.E.S. Vista Alegre',
         new Date('09/10/2018'),
@@ -47,7 +51,7 @@ export class CvComponent implements OnInit {
         ''
       ),
       new Formacion(
-        (this.i += 1),
+        (this.idFormacion += 1),
         'C.F.G.S. Administración de Sistemas Informáticos',
         'I.E.S. Leonardo da Vinci',
         new Date('09/10/2002'),
@@ -58,7 +62,7 @@ export class CvComponent implements OnInit {
     ];
     this.cursos = [
       new Curso(
-        this.i,
+        this.idCurso,
         'C.F.G.S. Desarrollo de Aplicaciones Web',
         'I.E.S. Vista Alegre',
         new Date('09/10/2018'),
@@ -67,7 +71,7 @@ export class CvComponent implements OnInit {
         ''
       ),
       new Curso(
-        (this.i += 1),
+        (this.idCurso += 1),
         'Master en CSS',
         'Udemy - Victor Robles Web',
         new Date('09/10/2002'),
@@ -76,9 +80,32 @@ export class CvComponent implements OnInit {
         'certificados/css.jpg'
       ),
     ];
+    this.conocimientos = [
+      new Conocimiento(this.idConocimiento, 'JavaScript', 75),
+      new Conocimiento((this.idConocimiento += 1), 'HTML', 95),
+
+      new Conocimiento((this.idConocimiento += 1), 'Java', 50),
+    ];
   }
 
   ngOnInit(): void {
+    $(document).ready(function () {
+      var bars = $('.progress-bar');
+
+      for (var i = 0; i < bars.length; i++) {
+        console.log(i);
+        var progress = $(bars[i]).attr('aria-valuenow');
+        $(bars[i]).width(progress + '%');
+
+        if (progress >= '65') {
+          $(bars[i]).addClass('bar-success');
+        } else if (progress >= '40' && progress < '65') {
+          $(bars[i]).addClass('bar-warning');
+        } else {
+          $(bars[i]).addClass('bar-error');
+        }
+      }
+    });
     for (var j = 1; j < this.trabajos.length; j++) {
       $('#titulo-trabajo' + j).click(function () {
         $('#descTrabajo' + j).slideToggle('slow');

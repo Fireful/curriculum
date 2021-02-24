@@ -19,12 +19,13 @@ import { ErrorComponent } from './components/error/error.component';
 import { DetalleComponent } from './components/detalle/detalle.component';
 import { PeliculasComponent } from './components/peliculas/peliculas.component';
 import { LoginComponent } from './components/login/login.component';
-import { PeliculaComponent } from './components/pelicula/pelicula.component';
-import { TrabajoComponent } from './components/trabajo/trabajo.component';
+import { PeliculaComponent } from './components/peliculas/pelicula/pelicula.component';
+import { TrabajoComponent } from './components/cv/trabajo/trabajo.component';
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
-import { FormacionComponent } from './components/formacion/formacion.component';
-import { CursoComponent } from './components/curso/curso.component';
+import { FormacionComponent } from './components/cv/formacion/formacion.component';
+import { CursoComponent } from './components/cv/curso/curso.component';
+import { ConocimientoComponent } from './components/cv/conocimiento/conocimiento.component';
 registerLocaleData(localeEs, 'es');
 
 @NgModule({
@@ -48,6 +49,7 @@ registerLocaleData(localeEs, 'es');
     FormacionComponent,
     CursoComponent,
     EsParPipe,
+    ConocimientoComponent,
   ],
   imports: [BrowserModule, NgbModule, routing, MatNativeDateModule],
   providers: [appRoutingProviders, { provide: LOCALE_ID, useValue: 'es' }],

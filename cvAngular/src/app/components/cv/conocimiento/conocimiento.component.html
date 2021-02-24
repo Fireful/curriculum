@@ -1,0 +1,9 @@
+<div class="conocimiento"><span class="conocimiento-item">
+    {{conocimiento.nombre}}
+  </span>
+    <div class="progress">
+        <div class="progress-bar" role="progressbar" style="width: {{conocimiento.porcentaje}}%;" [attr.aria-valuenow]='conocimiento.porcentaje' aria-valuemin="0" aria-valuemax="100">
+            {{conocimiento.porcentaje}}%</div>
+    </div>
+</div>
+<div class="clearfix"></div>
