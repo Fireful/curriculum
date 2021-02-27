@@ -1,32 +1,65 @@
 import { Component, OnInit } from '@angular/core';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
-declare var $:any;
+declare var $: any;
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  closeResult='';
-
-  constructor(private modalService: NgbModal) { }
-
-  openRegistro(modalRegistro){
-    this.modalService.dismissAll();
-    this.modalService.open(modalRegistro, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
+  closeResult = '';
+  public userLogin: any;
+  public userRegister: any;
+  constructor(private modalService: NgbModal) {
+    this.userLogin = {
+      username: '',
+      password: '',
+    };
+    this.userRegister = {
+      nombre: '',
+      apellidos: '',
+      email: '',
+      password: '',
+      repassword: '',
+    };
   }
-  openLogin(modalLogin){
+
+  onLogin() {
+    alert('Usuario logado');
+    console.log(this.userLogin);
+  }
+
+  onRegister() {
+    alert('Usuario registrado');
+    console.log(this.userRegister);
+  }
+
+  openRegistro(modalRegistro) {
     this.modalService.dismissAll();
-    this.modalService.open(modalLogin, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
+    this.modalService
+      .open(modalRegistro, { ariaLabelledBy: 'modal-basic-title' })
+      .result.then(
+        (result) => {
+          this.closeResult = `Closed with: ${result}`;
+        },
+        (reason) => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        }
+      );
+  }
+  openLogin(modalLogin) {
+    this.modalService.dismissAll();
+    this.modalService
+      .open(modalLogin, { ariaLabelledBy: 'modal-basic-title' })
+      .result.then(
+        (result) => {
+          this.closeResult = `Closed with: ${result}`;
+        },
+        (reason) => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        }
+      );
   }
 
   private getDismissReason(reason: any): string {
@@ -40,12 +73,8 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    $('button').click(function(){
+    $('button').click(function () {
       $('#jquery').slideToggle('slow');
-    })
+    });
   }
-
-
-
-
 }

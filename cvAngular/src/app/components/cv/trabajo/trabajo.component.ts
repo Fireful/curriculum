@@ -1,15 +1,26 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Trabajo } from 'src/app/models/trabajo';
+import { Experiencia } from 'src/app/models/experiencia';
+import { ExperienciaService } from '../../../services/experiencia.service';
 
 @Component({
   selector: 'app-trabajo',
   templateUrl: './trabajo.component.html',
   styleUrls: ['./trabajo.component.scss'],
+  providers: [ExperienciaService],
 })
 export class TrabajoComponent implements OnInit {
-  @Input() trabajo: Trabajo;
+  @Input() trabajo: Experiencia;
 
-  constructor() {}
+  constructor(private _experienciaService: ExperienciaService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this._experienciaService.getJobs().subscribe(
+      (response) => {
+        console.log(response);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
 }

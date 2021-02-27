@@ -77,14 +77,14 @@ var controller = {
 
     getJobs: (req, res) => {
 
-        var query = Experiencia.find({});
+        var query = Experiencia.find();
         var last = req.params.last;
 
         if (last || last != undefined) {
             query.limit(5);
         }
         //find
-        query.sort('-_id').exec((err, jobs) => {
+        query.sort('_id').exec((err, jobs) => {
 
             if (err) {
                 return res.status(500).send({
@@ -97,7 +97,7 @@ var controller = {
                     message: "No hay trabajos para mostrar"
                 });
             } else {
-                return res.status(404).send({
+                return res.status(200).send({
                     status: 'success',
                     jobs
                 });
@@ -107,7 +107,7 @@ var controller = {
 
     },
 
-    getArticle: (req, res) => {
+    getJob: (req, res) => {
 
         //recoger id de la url
         var jobId = req.params.id;
@@ -265,19 +265,19 @@ var controller = {
             });
             /* var jobId = req.params.id;
             Experiencia.findOneAndUpdate({ _id: jobId }, { logo: file_name }, { new: true }, (err, jobUpdated) => {
-                if (err || !jobUpdated) {
-                    return res.status(200).send({
-                        status: 'error',
-                        message: "Error al subir la imagen"
-                    });
-                }
+            	if (err || !jobUpdated) {
+            		return res.status(200).send({
+            			status: 'error',
+            			message: "Error al subir la imagen"
+            		});
+            	}
 
             }); */
 
 
         }
 
-    },// end upload file
+    }, // end upload file
 
     getImage: (req, res) => {
         var file = req.params.logo;
@@ -300,12 +300,14 @@ var controller = {
 
         //find or
         Experiencia.find({
-            "$or": [
-                { "empresa": { "$regex": searchString, "$options": "i" } },
-                { "puesto": { "$regex": searchString, "$options": "i" } }
-            ]
-        })
-            .sort([['inicio', 'descending']])
+                "$or": [
+                    { "empresa": { "$regex": searchString, "$options": "i" } },
+                    { "puesto": { "$regex": searchString, "$options": "i" } }
+                ]
+            })
+            .sort([
+                ['inicio', 'descending']
+            ])
             .exec((err, jobs) => {
 
                 if (err) {

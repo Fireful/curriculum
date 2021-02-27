@@ -1,20 +1,18 @@
 'use strict'
-const { use } = require("../app");
 
 var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
 
-var ExperienciaSchema = Schema({
-    inicio: Date,
-    fin: { type: Date, default: Date.now },
+var JobSchema = Schema({
+    id: String,
     logo: String,
     empresa: String,
+    inicio: Date,
+    fin: { type: Date, default: Date.now },
     puesto: String,
-    contenido: String
+    descripcion: String
 
 });
 
-module.exports = mongoose.model('Experiencia', ExperienciaSchema);
-
-
+module.exports = mongoose.model('Experiencia', JobSchema);

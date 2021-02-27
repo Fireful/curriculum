@@ -1,4 +1,4 @@
-export class Trabajo {
+export class Experiencia {
   /* public titulo: string;
   public year: number;
   public image: string;
@@ -9,10 +9,12 @@ export class Trabajo {
     this.image = image;
   } */
   constructor(
-    public id,
+    public id: number,
+    public logo: string,
     public empresa: string,
     public inicio: Date,
     public fin: Date,
+    public puesto: string,
     public descripcion: string
   ) {}
 }

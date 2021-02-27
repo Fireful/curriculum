@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { routing, appRoutingProviders } from './app.routing';
 import { MatNativeDateModule } from '@angular/material/core';
 import { EsParPipe } from './pipes/espar.pipe';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -51,7 +53,14 @@ registerLocaleData(localeEs, 'es');
     EsParPipe,
     ConocimientoComponent,
   ],
-  imports: [BrowserModule, NgbModule, routing, MatNativeDateModule],
+  imports: [
+    BrowserModule,
+    NgbModule,
+    HttpClientModule,
+    routing,
+    MatNativeDateModule,
+    FormsModule,
+  ],
   providers: [appRoutingProviders, { provide: LOCALE_ID, useValue: 'es' }],
   bootstrap: [AppComponent],
 })

@@ -50,9 +50,9 @@
 
             </div>
             <div id="tabs-experiencia">
-                <div id="articles" *ngIf="trabajos">
-                    <div *ngFor="let trabajo of trabajos let i=index;">
-                        <app-trabajo [trabajo]="trabajo">
+                <div id="articles" *ngIf="jobs">
+                    <div *ngFor="let job of jobs let i=index;">
+                        <app-trabajo [trabajo]="job">
 
                         </app-trabajo>
                     </div>

@@ -2,17 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { Conocimiento } from 'src/app/models/conocimiento';
 import { Curso } from 'src/app/models/curso';
 import { Formacion } from 'src/app/models/formacion';
-import { Trabajo } from 'src/app/models/trabajo';
+import { Experiencia } from 'src/app/models/experiencia';
+import { ExperienciaService } from '../../services/experiencia.service';
 
 declare var $: any;
 @Component({
   selector: 'app-cv',
   templateUrl: './cv.component.html',
   styleUrls: ['./cv.component.scss'],
+  providers: [ExperienciaService],
 })
 export class CvComponent implements OnInit {
   public titulo: string;
-  public trabajos: Trabajo[];
+  public jobs: Experiencia[];
   public idTrabajo: number = 1;
   public idFormacion: number = 1;
   public idConocimiento: number = 1;
@@ -22,21 +24,25 @@ export class CvComponent implements OnInit {
   public cursos: Curso[];
 
   public conocimientos: Conocimiento[];
-  constructor() {
+  constructor(private _experienciaService: ExperienciaService) {
     this.titulo = 'Curriculum Vitae';
-    this.trabajos = [
-      new Trabajo(
+    this.jobs = [
+      new Experiencia(
         this.idTrabajo,
+        '',
         'Melit',
         new Date('10/05/2020'),
         new Date('12/25/2020'),
+        'Programador',
         'Trabajo con Angular'
       ),
-      new Trabajo(
+      new Experiencia(
         (this.idTrabajo += 1),
+        '',
         'Web Financial Group',
         new Date('12/05/2012'),
         new Date('08/10/2015'),
+        'Desarrollador web',
         'Trabajo con Angular'
       ),
     ];
@@ -89,6 +95,14 @@ export class CvComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this._experienciaService.getJobs().subscribe(
+      (response) => {
+        console.log(response);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
     $(document).ready(function () {
       var bars = $('.progress-bar');
 
@@ -106,7 +120,7 @@ export class CvComponent implements OnInit {
         }
       }
     });
-    for (var j = 1; j < this.trabajos.length; j++) {
+    for (var j = 1; j < this.jobs.length; j++) {
       $('#titulo-trabajo' + j).click(function () {
         $('#descTrabajo' + j).slideToggle('slow');
       });
