@@ -1,16 +1,25 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Curso } from 'src/app/models/curso';
+import { CursoService } from 'src/app/services/curso.service';
+import { Global } from 'src/app/services/global';
 
 @Component({
   selector: 'app-curso',
   templateUrl: './curso.component.html',
   styleUrls: ['./curso.component.scss'],
+  providers: [CursoService],
 })
 export class CursoComponent implements OnInit {
+  public url: string;
   @Input() curso: Curso;
   closeResult = '';
-  constructor(private modalService: NgbModal) {}
+  constructor(
+    private modalService: NgbModal,
+    private _cursoService: CursoService
+  ) {
+    this.url = Global.url;
+  }
 
   openCertificado(modalCertificado, id) {
     this.modalService.dismissAll();
@@ -36,5 +45,14 @@ export class CursoComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this._cursoService.getCursos().subscribe(
+      (response) => {
+        console.log(response);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
 }

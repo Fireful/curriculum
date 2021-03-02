@@ -9,12 +9,11 @@ export class Curso {
     this.image = image;
   } */
   constructor(
-    public id,
-    public nombre,
+    public _id,
+    public nombre: string,
     public centro: string,
-    public inicio: Date,
-    public fin: Date,
-    public info: string,
+    public fecha: Date,
+    public duracion: string,
     public imagen: string
   ) {}
 }

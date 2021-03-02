@@ -1,10 +1,10 @@
 'use strict'
 
 var validator = require('validator');
-var Experiencia = require('../models/experiencia');
+var Curso = require('../models/curso');
 var fs = require('fs');
 var path = require('path');
-const { exists } = require('../models/experiencia');
+const { exists } = require('../models/curso');
 
 var controller = {
     datosCurso: (req, res) => {
@@ -19,7 +19,7 @@ var controller = {
 
     test: (req, res) => {
         return res.status(200).send({
-            message: "Soy la acción Test de mi controlador de experiencia"
+            message: "Soy la acción Test de mi controlador de los cursos"
         });
     },
     save: (req, res) => {
@@ -28,11 +28,9 @@ var controller = {
 
         // validar datos (validator)
         try {
-            var validate_start = !validator.isEmpty(params.inicio);
-            var validate_end = !validator.isEmpty(params.fin);
-            var validate_empresa = !validator.isEmpty(params.empresa);
-            var validate_puesto = !validator.isEmpty(params.puesto);
-            var validate_contenido = !validator.isEmpty(params.contenido);
+            var validate_fecha = !validator.isEmpty(params.inicio);
+            var validate_centro = !validator.isEmpty(params.centro);
+            var validate_nombre = !validator.isEmpty(params.nombre);
 
         } catch (err) {
             return res.status(200).send({
@@ -40,31 +38,30 @@ var controller = {
                 message: "Faltan datos por enviar"
             });
         }
-        if (validate_start && validate_end && validate_empresa && validate_puesto && validate_contenido) {
+        if (validate_fecha && validate_centro && validate_nombre) {
 
             //crear objeto a guardar
-            var experiencia = new Experiencia();
+            var curso = new Curso();
 
             //Asignar valores
-            experiencia.inicio = params.inicio;
-            experiencia.fin = params.fin;
-            experiencia.empresa = params.empresa;
-            experiencia.puesto = params.puesto;
-            experiencia.logo = null;
-            experiencia.contenido = params.contenido;
+            curso.fecha = params.fecha;
+            curso.duracion = params.duracion;
+            curso.centro = params.centro;
+            curso.nombre = params.nombre;
+            curso.imagen = params.imagen;
 
-            //guardar experiencia
-            experiencia.save((err, jobStored) => {
-                if (err || !jobStored) {
+            //guardar curso
+            curso.save((err, cursoStored) => {
+                if (err || !cursoStored) {
                     return res.status(404).send({
                         status: 'error',
-                        message: "La experiencia no se ha guardado"
+                        message: "El curso no se ha guardado"
                     });
                 }
                 //Devolver respuesta
                 return res.status(200).send({
                     status: 'success',
-                    experiencia: jobStored
+                    curso: cursoStored
                 });
             })
         } else {
@@ -77,29 +74,29 @@ var controller = {
 
     getJobs: (req, res) => {
 
-        var query = Experiencia.find();
+        var query = Curso.find();
         var last = req.params.last;
 
         if (last || last != undefined) {
             query.limit(5);
         }
         //find
-        query.sort('_id').exec((err, jobs) => {
+        query.sort('_id').exec((err, cursos) => {
 
             if (err) {
                 return res.status(500).send({
                     status: 'error',
                     message: "No se han podido obtener los datos"
                 });
-            } else if (!jobs) {
+            } else if (!cursos) {
                 return res.status(404).send({
                     status: 'error',
-                    message: "No hay trabajos para mostrar"
+                    message: "No hay cursos para mostrar"
                 });
             } else {
                 return res.status(200).send({
                     status: 'success',
-                    jobs
+                    cursos
                 });
             }
 
@@ -110,18 +107,18 @@ var controller = {
     getJob: (req, res) => {
 
         //recoger id de la url
-        var jobId = req.params.id;
+        var cursoId = req.params.id;
 
         //Comprobar que existe
-        if (!jobId || jobId == null) {
+        if (!cursoId || cursoId == null) {
             return res.status(404).send({
                 status: 'error',
                 message: "No existe el trabajo selecionado"
             });
         }
         //Buscar el artículo
-        Experiencia.findById(jobId, (err, job) => {
-            if (err || !job) {
+        curso.findById(cursoId, (err, curso) => {
+            if (err || !curso) {
                 return res.status(404).send({
                     status: 'error',
                     message: "No existe el trabajo solicitado"
@@ -130,7 +127,7 @@ var controller = {
             //Devolver el resultado
             return res.status(404).send({
                 status: 'success',
-                job
+                curso
             });
         });
 
@@ -138,7 +135,7 @@ var controller = {
 
     update: (req, res) => {
         //Recoger el ID del artículo por la url
-        var jobId = req.params.id;
+        var cursoId = req.params.id;
 
         //Recoger los datos que llegan por put
         var params = req.body;
@@ -157,7 +154,7 @@ var controller = {
         }
         if (validate_start && validate_end && validate_empresa && validate_puesto && validate_contenido) {
             //Find and update
-            Experiencia.findByIdAndUpdate({ _id: jobId }, params, { new: true }, (err, jobUpdated) => {
+            curso.findByIdAndUpdate({ _id: cursoId }, params, { new: true }, (err, cursoUpdated) => {
                 if (err) {
                     return res.status(404).send({
                         status: 'error',
@@ -165,7 +162,7 @@ var controller = {
                     });
                 }
 
-                if (!jobUpdated) {
+                if (!cursoUpdated) {
                     return res.status(404).send({
                         status: 'error',
                         message: "No existe el artículo"
@@ -174,7 +171,7 @@ var controller = {
 
                 return res.status(404).send({
                     status: 'success',
-                    job: jobUpdated
+                    curso: cursoUpdated
                 });
             });
         } else {
@@ -186,9 +183,9 @@ var controller = {
     },
     delete: (req, res) => {
         // Recoger el id del trabajo a eliminar
-        var jobId = req.params.id;
+        var cursoId = req.params.id;
         // Find and delete
-        Experiencia.findOneAndDelete({ _id: jobId }, (err, jobDeleted) => {
+        curso.findOneAndDelete({ _id: cursoId }, (err, cursoDeleted) => {
             if (err) {
                 return res.status(404).send({
                     status: 'error',
@@ -196,7 +193,7 @@ var controller = {
                 });
             }
 
-            if (!jobDeleted) {
+            if (!cursoDeleted) {
                 return res.status(404).send({
                     status: 'error',
                     message: "No existe el trabajo a borrar"
@@ -205,13 +202,13 @@ var controller = {
 
             return res.status(404).send({
                 status: 'success',
-                job: jobDeleted
+                curso: cursoDeleted
             });
         });
     },
 
     upload: (req, res) => {
-        //Configurar modulo connect-multiparty router/experiencia.js
+        //Configurar modulo connect-multiparty router/curso.js
 
         //Recoger el fichero de la petición
         var file_name = 'imagen no subida...';
@@ -248,11 +245,11 @@ var controller = {
             });
         } else {
             //Si todo es válido
-            var jobId = req.params.id;
+            var cursoId = req.params.id;
             //Buscar artículo asignado al nombre de la imagey actualizarlo
 
-            Experiencia.findOneAndUpdate({ _id: jobId }, { logo: file_name }, { new: true }, (err, jobUpdated) => {
-                if (err || !jobUpdated) {
+            curso.findOneAndUpdate({ _id: cursoId }, { logo: file_name }, { new: true }, (err, cursoUpdated) => {
+                if (err || !cursoUpdated) {
                     return res.status(200).send({
                         status: 'error',
                         message: "Error al subir la imagen"
@@ -260,12 +257,12 @@ var controller = {
                 }
                 return res.status(200).send({
                     status: 'success',
-                    experiencia: jobUpdated
+                    curso: cursoUpdated
                 });
             });
-            /* var jobId = req.params.id;
-            Experiencia.findOneAndUpdate({ _id: jobId }, { logo: file_name }, { new: true }, (err, jobUpdated) => {
-            	if (err || !jobUpdated) {
+            /* var cursoId = req.params.id;
+            curso.findOneAndUpdate({ _id: cursoId }, { logo: file_name }, { new: true }, (err, cursoUpdated) => {
+            	if (err || !cursoUpdated) {
             		return res.status(200).send({
             			status: 'error',
             			message: "Error al subir la imagen"
@@ -281,7 +278,7 @@ var controller = {
 
     getImage: (req, res) => {
         var file = req.params.logo;
-        var path_file = './upload/experiencias/' + file;
+        var path_file = './upload/cursos/' + file;
         fs.exists(path_file, (exists) => {
             if (exists) {
                 return res.sendFile(path.resolve(path_file))
@@ -299,7 +296,7 @@ var controller = {
         var searchString = req.params.search;
 
         //find or
-        Experiencia.find({
+        curso.find({
                 "$or": [
                     { "empresa": { "$regex": searchString, "$options": "i" } },
                     { "puesto": { "$regex": searchString, "$options": "i" } }
@@ -308,7 +305,7 @@ var controller = {
             .sort([
                 ['inicio', 'descending']
             ])
-            .exec((err, jobs) => {
+            .exec((err, cursos) => {
 
                 if (err) {
                     return res.status(500).send({
@@ -317,7 +314,7 @@ var controller = {
                     });
                 }
 
-                if (!jobs || jobs.length <= 0) {
+                if (!cursos || cursos.length <= 0) {
                     return res.status(404).send({
                         status: 'error',
                         message: 'No se ha encontrado nada',
@@ -326,7 +323,7 @@ var controller = {
 
                 return res.status(200).send({
                     status: 'success',
-                    jobs
+                    cursos
                 });
             })
 

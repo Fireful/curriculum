@@ -9,7 +9,7 @@ export class Experiencia {
     this.image = image;
   } */
   constructor(
-    public id: number,
+    public _id: string,
     public logo: string,
     public empresa: string,
     public inicio: Date,

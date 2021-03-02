@@ -9,7 +9,7 @@ export class Formacion {
     this.image = image;
   } */
   constructor(
-    public id,
+    public _id,
     public nombre,
     public centro: string,
     public inicio: Date,

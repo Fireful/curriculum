@@ -1,10 +1,10 @@
 'use strict'
 
 var validator = require('validator');
-var Experiencia = require('../models/experiencia');
+var Formacion = require('../models/formacion');
 var fs = require('fs');
 var path = require('path');
-const { exists } = require('../models/experiencia');
+const { exists } = require('../models/formacion');
 
 var controller = {
     datosCurso: (req, res) => {
@@ -19,7 +19,7 @@ var controller = {
 
     test: (req, res) => {
         return res.status(200).send({
-            message: "Soy la acción Test de mi controlador de experiencia"
+            message: "Soy la acción Test de mi controlador de formacion"
         });
     },
     save: (req, res) => {
@@ -30,9 +30,8 @@ var controller = {
         try {
             var validate_start = !validator.isEmpty(params.inicio);
             var validate_end = !validator.isEmpty(params.fin);
-            var validate_empresa = !validator.isEmpty(params.empresa);
-            var validate_puesto = !validator.isEmpty(params.puesto);
-            var validate_contenido = !validator.isEmpty(params.contenido);
+            var validate_centro = !validator.isEmpty(params.centro);
+            var validate_titulacion = !validator.isEmpty(params.titulacion);
 
         } catch (err) {
             return res.status(200).send({
@@ -40,31 +39,29 @@ var controller = {
                 message: "Faltan datos por enviar"
             });
         }
-        if (validate_start && validate_end && validate_empresa && validate_puesto && validate_contenido) {
+        if (validate_start && validate_end && validate_centro && validate_titulacion) {
 
             //crear objeto a guardar
-            var experiencia = new Experiencia();
+            var formacion = new Formacion();
 
             //Asignar valores
-            experiencia.inicio = params.inicio;
-            experiencia.fin = params.fin;
-            experiencia.empresa = params.empresa;
-            experiencia.puesto = params.puesto;
-            experiencia.logo = null;
-            experiencia.contenido = params.contenido;
+            formacion.inicio = params.inicio;
+            formacion.fin = params.fin;
+            formacion.empresa = params.centro;
+            formacion.puesto = params.titulacion;
 
             //guardar experiencia
-            experiencia.save((err, jobStored) => {
-                if (err || !jobStored) {
+            formacion.save((err, formacionStored) => {
+                if (err || !formacionStored) {
                     return res.status(404).send({
                         status: 'error',
-                        message: "La experiencia no se ha guardado"
+                        message: "La formación no se ha guardado"
                     });
                 }
                 //Devolver respuesta
                 return res.status(200).send({
                     status: 'success',
-                    experiencia: jobStored
+                    formacion: formacionStored
                 });
             })
         } else {
@@ -75,31 +72,31 @@ var controller = {
         }
     },
 
-    getJobs: (req, res) => {
+    getFormaciones: (req, res) => {
 
-        var query = Experiencia.find();
+        var query = Formacion.find();
         var last = req.params.last;
 
         if (last || last != undefined) {
             query.limit(5);
         }
         //find
-        query.sort('_id').exec((err, jobs) => {
+        query.sort('_id').exec((err, formaciones) => {
 
             if (err) {
                 return res.status(500).send({
                     status: 'error',
                     message: "No se han podido obtener los datos"
                 });
-            } else if (!jobs) {
+            } else if (!formaciones) {
                 return res.status(404).send({
                     status: 'error',
-                    message: "No hay trabajos para mostrar"
+                    message: "No hay formaciones para mostrar"
                 });
             } else {
                 return res.status(200).send({
                     status: 'success',
-                    jobs
+                    formaciones
                 });
             }
 
@@ -107,30 +104,30 @@ var controller = {
 
     },
 
-    getJob: (req, res) => {
+    getFormacion: (req, res) => {
 
         //recoger id de la url
-        var jobId = req.params.id;
+        var formacionId = req.params._id;
 
         //Comprobar que existe
-        if (!jobId || jobId == null) {
+        if (!formacionId || formacionId == null) {
             return res.status(404).send({
                 status: 'error',
-                message: "No existe el trabajo selecionado"
+                message: "No existe la formación selecionada"
             });
         }
         //Buscar el artículo
-        Experiencia.findById(jobId, (err, job) => {
-            if (err || !job) {
+        Formacion.findById(formacionId, (err, formacion) => {
+            if (err || !formacion) {
                 return res.status(404).send({
                     status: 'error',
-                    message: "No existe el trabajo solicitado"
+                    message: "No existe la formación solicitada"
                 });
             }
             //Devolver el resultado
             return res.status(404).send({
                 status: 'success',
-                job
+                formacion
             });
         });
 
@@ -138,7 +135,7 @@ var controller = {
 
     update: (req, res) => {
         //Recoger el ID del artículo por la url
-        var jobId = req.params.id;
+        var formacionId = req.params.id;
 
         //Recoger los datos que llegan por put
         var params = req.body;
@@ -146,18 +143,17 @@ var controller = {
         try {
             var validate_start = !validator.isEmpty(params.inicio);
             var validate_end = !validator.isEmpty(params.fin);
-            var validate_empresa = !validator.isEmpty(params.empresa);
-            var validate_puesto = !validator.isEmpty(params.puesto);
-            var validate_contenido = !validator.isEmpty(params.contenido);
+            var validate_centro = !validator.isEmpty(params.centro);
+            var validate_titulacion = !validator.isEmpty(params.titulacion);
         } catch (err) {
             return res.status(200).send({
                 status: 'error',
                 message: "Faltan datos por enviar"
             });
         }
-        if (validate_start && validate_end && validate_empresa && validate_puesto && validate_contenido) {
+        if (validate_start && validate_end && validate_centro && validate_titulacion) {
             //Find and update
-            Experiencia.findByIdAndUpdate({ _id: jobId }, params, { new: true }, (err, jobUpdated) => {
+            Formacion.findByIdAndUpdate({ _id: formacionId }, params, { new: true }, (err, formacionUpdated) => {
                 if (err) {
                     return res.status(404).send({
                         status: 'error',
@@ -165,16 +161,16 @@ var controller = {
                     });
                 }
 
-                if (!jobUpdated) {
+                if (!formacionUpdated) {
                     return res.status(404).send({
                         status: 'error',
-                        message: "No existe el artículo"
+                        message: "No existe la formación"
                     });
                 }
 
                 return res.status(404).send({
                     status: 'success',
-                    job: jobUpdated
+                    formacion: formacionUpdated
                 });
             });
         } else {
@@ -186,9 +182,9 @@ var controller = {
     },
     delete: (req, res) => {
         // Recoger el id del trabajo a eliminar
-        var jobId = req.params.id;
+        var formacionId = req.params.id;
         // Find and delete
-        Experiencia.findOneAndDelete({ _id: jobId }, (err, jobDeleted) => {
+        Formacion.findOneAndDelete({ _id: formacionId }, (err, formacionDeleted) => {
             if (err) {
                 return res.status(404).send({
                     status: 'error',
@@ -196,16 +192,16 @@ var controller = {
                 });
             }
 
-            if (!jobDeleted) {
+            if (!formacionDeleted) {
                 return res.status(404).send({
                     status: 'error',
-                    message: "No existe el trabajo a borrar"
+                    message: "No existe la formación a borrar"
                 });
             }
 
             return res.status(404).send({
                 status: 'success',
-                job: jobDeleted
+                formacion: formacionDeleted
             });
         });
     },
@@ -248,11 +244,11 @@ var controller = {
             });
         } else {
             //Si todo es válido
-            var jobId = req.params.id;
+            var formacionId = req.params.id;
             //Buscar artículo asignado al nombre de la imagey actualizarlo
 
-            Experiencia.findOneAndUpdate({ _id: jobId }, { logo: file_name }, { new: true }, (err, jobUpdated) => {
-                if (err || !jobUpdated) {
+            Formacion.findOneAndUpdate({ _id: formacionId }, { logo: file_name }, { new: true }, (err, formacionUpdated) => {
+                if (err || !formacionUpdated) {
                     return res.status(200).send({
                         status: 'error',
                         message: "Error al subir la imagen"
@@ -260,7 +256,7 @@ var controller = {
                 }
                 return res.status(200).send({
                     status: 'success',
-                    experiencia: jobUpdated
+                    experiencia: formacionUpdated
                 });
             });
             /* var jobId = req.params.id;
@@ -279,36 +275,21 @@ var controller = {
 
     }, // end upload file
 
-    getImage: (req, res) => {
-        var file = req.params.logo;
-        var path_file = './upload/experiencias/' + file;
-        fs.exists(path_file, (exists) => {
-            if (exists) {
-                return res.sendFile(path.resolve(path_file))
-            } else {
-                return res.status(404).send({
-                    status: 'error',
-                    path_file
-                });
-            }
-        })
-    },
-
     search: (req, res) => {
         //Sacar String a buscar
         var searchString = req.params.search;
 
         //find or
-        Experiencia.find({
+        Formacion.find({
                 "$or": [
-                    { "empresa": { "$regex": searchString, "$options": "i" } },
-                    { "puesto": { "$regex": searchString, "$options": "i" } }
+                    { "centro": { "$regex": searchString, "$options": "i" } },
+                    { "titulacion": { "$regex": searchString, "$options": "i" } }
                 ]
             })
             .sort([
                 ['inicio', 'descending']
             ])
-            .exec((err, jobs) => {
+            .exec((err, formaciones) => {
 
                 if (err) {
                     return res.status(500).send({
@@ -317,7 +298,7 @@ var controller = {
                     });
                 }
 
-                if (!jobs || jobs.length <= 0) {
+                if (!formaciones || formaciones.length <= 0) {
                     return res.status(404).send({
                         status: 'error',
                         message: 'No se ha encontrado nada',
@@ -326,7 +307,7 @@ var controller = {
 
                 return res.status(200).send({
                     status: 'success',
-                    jobs
+                    formaciones
                 });
             })
 

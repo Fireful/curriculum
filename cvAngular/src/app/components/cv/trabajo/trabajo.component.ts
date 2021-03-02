@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Experiencia } from 'src/app/models/experiencia';
+import { Global } from 'src/app/services/global';
 import { ExperienciaService } from '../../../services/experiencia.service';
 
 @Component({
@@ -9,9 +10,12 @@ import { ExperienciaService } from '../../../services/experiencia.service';
   providers: [ExperienciaService],
 })
 export class TrabajoComponent implements OnInit {
+  public url:string;
   @Input() trabajo: Experiencia;
 
-  constructor(private _experienciaService: ExperienciaService) {}
+  constructor(private _experienciaService: ExperienciaService) {
+    this.url=Global.url;
+  }
 
   ngOnInit(): void {
     this._experienciaService.getJobs().subscribe(

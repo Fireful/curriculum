@@ -14,12 +14,14 @@ router.post('/datos-curso', ExperienciaController.datosCurso);
 // Rutas útiles
 router.post('/save', ExperienciaController.save);
 router.get('/jobs/:last?', ExperienciaController.getJobs);
+router.get('/jobs', ExperienciaController.getJobs);
 router.get('/job/:id', ExperienciaController.getJob);
 router.put('/job/:id', ExperienciaController.update);
 router.delete('/job/:id', ExperienciaController.delete);
 router.post('/upload-image/:id', md_upload, ExperienciaController.upload);
 router.get('/get-image/:logo', ExperienciaController.getImage);
 router.get('/search/:search', ExperienciaController.search);
+
 
 
 

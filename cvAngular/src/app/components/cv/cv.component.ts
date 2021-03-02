@@ -25,7 +25,7 @@ export class CvComponent implements OnInit {
 
   public conocimientos: Conocimiento[];
   constructor(private _experienciaService: ExperienciaService) {
-    this.titulo = 'Curriculum Vitae';
+    /* this.titulo = 'Curriculum Vitae';
     this.jobs = [
       new Experiencia(
         this.idTrabajo,
@@ -43,9 +43,9 @@ export class CvComponent implements OnInit {
         new Date('12/05/2012'),
         new Date('08/10/2015'),
         'Desarrollador web',
-        'Trabajo con Angular'
+        'Trabajo con HTML'
       ),
-    ];
+    ]; */
     this.formaciones = [
       new Formacion(
         this.idFormacion,
@@ -70,10 +70,9 @@ export class CvComponent implements OnInit {
       new Curso(
         this.idCurso,
         'C.F.G.S. Desarrollo de Aplicaciones Web',
-        'I.E.S. Vista Alegre',
+        'Academia Paco',
         new Date('09/10/2018'),
-        new Date('07/25/2020'),
-        'Texto del curso 1',
+        '150 horas',
         ''
       ),
       new Curso(
@@ -81,8 +80,8 @@ export class CvComponent implements OnInit {
         'Master en CSS',
         'Udemy - Victor Robles Web',
         new Date('09/10/2002'),
-        new Date('07/25/2004'),
-        'Texto del curso 2',
+        '150 horas',
+
         'certificados/css.jpg'
       ),
     ];
@@ -97,7 +96,10 @@ export class CvComponent implements OnInit {
   ngOnInit(): void {
     this._experienciaService.getJobs().subscribe(
       (response) => {
-        console.log(response);
+        if (response.jobs) {
+          this.jobs = response.jobs;
+        } else {
+        }
       },
       (error) => {
         console.log(error);
@@ -120,11 +122,11 @@ export class CvComponent implements OnInit {
         }
       }
     });
-    for (var j = 1; j < this.jobs.length; j++) {
+    /* for (var j = 1; j < this.jobs.length; j++) {
       $('#titulo-trabajo' + j).click(function () {
         $('#descTrabajo' + j).slideToggle('slow');
       });
-    }
+    } */
     $('#tab1').click(function () {
       $('#tabs-formacion').slideDown('slow');
       $('#tabs-experiencia').slideUp('slow');

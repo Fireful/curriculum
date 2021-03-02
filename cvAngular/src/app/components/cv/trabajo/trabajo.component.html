@@ -1,14 +1,25 @@
 <section class="experiencia-item" id="experiencia-template">
 
-    <div class="titulo-trabajo{{trabajo.id}}" id="titulo-trabajo">
-        <span id="periodo" class="periodo">{{trabajo.inicio| date:'MMMM YYYY'}} - {{trabajo.fin|date:'MMMM YYYY'}}</span>
-        <div class="clearfix"></div>
-        <h2 id="empresa">{{trabajo.empresa}}{{trabajo.id}}</h2>
+    <div class="row">
+        <div class="col-1 image-empresa">
+            <img src="{{url + 'get-image/' + trabajo.logo}}" alt="{{trabajo.empresa}}" *ngIf="trabajo.logo">
+            <img src="assets/images/default.png" alt="{{trabajo.empresa}}" *ngIf="!trabajo.logo">
+        </div>
+        <div class="col-11">
+            <div class="titulo-trabajo" id="titulo-trabajo">
+                <span id="periodo" class="periodo">{{trabajo.inicio| date:'MMMM YYYY'}} - {{trabajo.fin|date:'MMMM YYYY'}}</span>
+                <div class="clearfix"></div>
+                <h2 id="empresa">{{trabajo.empresa}}</h2>
+            </div>
+
+
+        </div>
     </div>
     <div class="clearfix"></div>
-    <a [routerLink]="['/detalle/id']">
-        <article class="descTrabajo" id="descTrabajo{{trabajo.id}}">{{trabajo.descripcion}}
+    <a [routerLink]="['/cv/trabajo/', trabajo._id]">
+        <article class="descTrabajo">{{trabajo.descripcion}}
         </article>
     </a>
     <hr />
+
 </section>
