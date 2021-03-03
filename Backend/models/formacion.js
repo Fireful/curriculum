@@ -9,6 +9,7 @@ var FormacionSchema = Schema({
     inicio: Date,
     fin: { type: Date, default: Date.now },
     titulacion: String,
+    imagen: String
 });
 
 module.exports = mongoose.model('formaciones', FormacionSchema);

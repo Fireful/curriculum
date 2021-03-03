@@ -5,7 +5,7 @@
     doloremque est eum quo itaque eveniet assumenda ratione illo sed repellendus ipsa beatae cum, amet, omnis illum. Ratione, labore tempore, consequatur obcaecati non quas amet cum omnis quidem commodi et quaerat inventore fuga magni animi laboriosam
     minima molestiae eum aliquam rem laudantium! Non vitae magnam doloribus? Similique consequatur natus iure. Omnis iste doloribus sequi!
 </article>
-<button *ngIf="curso.imagen!=''" class="btn btn-primary btnCert" (click)="openCertificado(modalCertificado,1)" aria-label="home">Ver Certificado
+<button *ngIf="curso.imagen!=''" class="btn btn-primary btnCert" (click)="openCertificado(modalCertificado, '{{curso._id}}')" aria-label="home">Ver Certificado {{curso.imagen}}
 </button>
 <hr>
 
@@ -13,5 +13,6 @@
 <!-- Modales -->
 <!-- Modal Certificado -->
 <ng-template #modalCertificado let-modal>
-    <img src="../../../assets/images/{{curso.imagen}}" />
+    <img src="{{url+'get-image/'}}{{curso.imagen}}" alt="{{curso.nombre}}" />
+    <!-- <img src="../../../assets/images/certificados/{{curso.imagen}}" /> -->
 </ng-template>

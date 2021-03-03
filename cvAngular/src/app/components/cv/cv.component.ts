@@ -4,13 +4,15 @@ import { Curso } from 'src/app/models/curso';
 import { Formacion } from 'src/app/models/formacion';
 import { Experiencia } from 'src/app/models/experiencia';
 import { ExperienciaService } from '../../services/experiencia.service';
+import { FormacionService } from 'src/app/services/formacion.service';
+import { CursoService } from 'src/app/services/curso.service';
 
 declare var $: any;
 @Component({
   selector: 'app-cv',
   templateUrl: './cv.component.html',
   styleUrls: ['./cv.component.scss'],
-  providers: [ExperienciaService],
+  providers: [ExperienciaService, FormacionService, CursoService],
 })
 export class CvComponent implements OnInit {
   public titulo: string;
@@ -24,7 +26,7 @@ export class CvComponent implements OnInit {
   public cursos: Curso[];
 
   public conocimientos: Conocimiento[];
-  constructor(private _experienciaService: ExperienciaService) {
+  constructor(private _experienciaService: ExperienciaService, private _formacionService: FormacionService, private _cursoService: CursoService) {
     /* this.titulo = 'Curriculum Vitae';
     this.jobs = [
       new Experiencia(
@@ -46,7 +48,7 @@ export class CvComponent implements OnInit {
         'Trabajo con HTML'
       ),
     ]; */
-    this.formaciones = [
+    /*  this.formaciones = [
       new Formacion(
         this.idFormacion,
         'C.F.G.S. Desarrollo de Aplicaciones Web',
@@ -65,7 +67,7 @@ export class CvComponent implements OnInit {
         'Texto del curso 2',
         ''
       ),
-    ];
+    ]; */
     this.cursos = [
       new Curso(
         this.idCurso,
@@ -105,6 +107,33 @@ export class CvComponent implements OnInit {
         console.log(error);
       }
     );
+
+    this._formacionService.getFormaciones().subscribe(
+      (response)=>{
+        if(response.formaciones){
+          this.formaciones=response.formaciones;
+        }else{
+          console.log("No hay formaciones");
+        }
+      },
+      (error)=>{
+        console.log(error);
+      }
+    );
+
+    this._cursoService.getCursos().subscribe(
+      (response)=>{
+        if(response.cursos){
+          this.cursos=response.cursos;
+        }else{
+          console.log("No hay cursos")
+        }
+      },
+      (error)=>{
+        console.log(error);
+      }
+    )
+
     $(document).ready(function () {
       var bars = $('.progress-bar');
 

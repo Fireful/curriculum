@@ -275,6 +275,23 @@ var controller = {
 
     }, // end upload file
 
+    getImage: (req, res) => {
+        var file = req.params.logo;
+        var path_file = './upload/formaciones/' + file;
+        fs.exists(path_file, (exists) => {
+            if (exists) {
+                return res.sendFile(path.resolve(path_file))
+            } else {
+                return res.status(404).send({
+                    status: 'error',
+                    path_file
+                });
+            }
+        })
+    },
+
+
+
     search: (req, res) => {
         //Sacar String a buscar
         var searchString = req.params.search;

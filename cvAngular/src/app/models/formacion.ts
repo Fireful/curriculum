@@ -10,7 +10,7 @@ export class Formacion {
   } */
   constructor(
     public _id,
-    public nombre,
+    public titulacion: string,
     public centro: string,
     public inicio: Date,
     public fin: Date,
