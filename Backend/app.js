@@ -10,6 +10,8 @@ var app = express();
 var experiencia_routes = require('./routes/experiencia');
 var formacion_routes = require('./routes/formacion');
 var curso_routes = require('./routes/curso');
+var conocimiento_routes = require('./routes/conocimiento');
+
 
 //Middlewares
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -27,6 +29,8 @@ app.use((req, res, next) => {
 app.use('/api', experiencia_routes);
 app.use('/api', formacion_routes);
 app.use('/api', curso_routes);
+app.use('/api', conocimiento_routes);
+
 
 
 

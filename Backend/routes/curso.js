@@ -19,7 +19,7 @@ router.get('/curso/:id', CursoController.getJob);
 router.put('/curso/:id', CursoController.update);
 router.delete('/curso/:id', CursoController.delete);
 router.post('/upload-image/:id', md_upload, CursoController.upload);
-router.get('/get-image/:logo', CursoController.getImage);
+router.get('/get-cert/:imagen', CursoController.getCert);
 router.get('/search/:search', CursoController.search);
 
 module.exports = router;

@@ -1,10 +1,10 @@
 'use strict'
 
 var validator = require('validator');
-var Formacion = require('../models/formacion');
+var Conocimiento = require('../models/conocimiento');
 var fs = require('fs');
 var path = require('path');
-const { exists } = require('../models/formacion');
+const { exists } = require('../models/conocimiento');
 
 var controller = {
     datosCurso: (req, res) => {
@@ -19,7 +19,7 @@ var controller = {
 
     test: (req, res) => {
         return res.status(200).send({
-            message: "Soy la acción Test de mi controlador de formacion"
+            message: "Soy la acción Test de mi controlador de los conocimientos"
         });
     },
     save: (req, res) => {
@@ -28,10 +28,8 @@ var controller = {
 
         // validar datos (validator)
         try {
-            var validate_start = !validator.isEmpty(params.inicio);
-            var validate_end = !validator.isEmpty(params.fin);
-            var validate_centro = !validator.isEmpty(params.centro);
-            var validate_titulacion = !validator.isEmpty(params.titulacion);
+            var validate_concepto = !validator.isEmpty(params.concepto);
+            var validate_nivel = !validator.isEmpty(params.nivel);
 
         } catch (err) {
             return res.status(200).send({
@@ -39,29 +37,28 @@ var controller = {
                 message: "Faltan datos por enviar"
             });
         }
-        if (validate_start && validate_end && validate_centro && validate_titulacion) {
+        if (validate_concepto && validate_nivel) {
 
             //crear objeto a guardar
-            var formacion = new Formacion();
+            var conocimiento = new Conocimiento();
 
             //Asignar valores
-            formacion.inicio = params.inicio;
-            formacion.fin = params.fin;
-            formacion.empresa = params.centro;
-            formacion.puesto = params.titulacion;
+            conocimiento.concepto = params.concepto;
+            conocimiento.nivel = params.nivel;
 
-            //guardar experiencia
-            formacion.save((err, formacionStored) => {
-                if (err || !formacionStored) {
+
+            //guardar curso
+            conocimiento.save((err, conocimientoStored) => {
+                if (err || !conocimientoStored) {
                     return res.status(404).send({
                         status: 'error',
-                        message: "La formación no se ha guardado"
+                        message: "El conocimiento no se ha guardado"
                     });
                 }
                 //Devolver respuesta
                 return res.status(200).send({
                     status: 'success',
-                    formacion: formacionStored
+                    curso: conocimientoStored
                 });
             })
         } else {
@@ -72,31 +69,31 @@ var controller = {
         }
     },
 
-    getFormaciones: (req, res) => {
+    getConocimientos: (req, res) => {
 
-        var query = Formacion.find();
+        var query = Conocimiento.find();
         var last = req.params.last;
 
         if (last || last != undefined) {
             query.limit(5);
         }
         //find
-        query.sort('_id').exec((err, formaciones) => {
+        query.sort('_id').exec((err, conocimientos) => {
 
             if (err) {
                 return res.status(500).send({
                     status: 'error',
                     message: "No se han podido obtener los datos"
                 });
-            } else if (!formaciones) {
+            } else if (!conocimientos) {
                 return res.status(404).send({
                     status: 'error',
-                    message: "No hay formaciones para mostrar"
+                    message: "No hay conocimientos para mostrar"
                 });
             } else {
                 return res.status(200).send({
                     status: 'success',
-                    formaciones
+                    conocimientos
                 });
             }
 
@@ -104,30 +101,30 @@ var controller = {
 
     },
 
-    getFormacion: (req, res) => {
+    getConocimiento: (req, res) => {
 
         //recoger id de la url
-        var formacionId = req.params._id;
+        var conocimientoId = req.params.id;
 
         //Comprobar que existe
-        if (!formacionId || formacionId == null) {
+        if (!conocimientoId || conocimientoId == null) {
             return res.status(404).send({
                 status: 'error',
-                message: "No existe la formación selecionada"
+                message: "No existe el conocimiento selecionado"
             });
         }
         //Buscar el artículo
-        Formacion.findById(formacionId, (err, formacion) => {
-            if (err || !formacion) {
+        conocimiento.findById(conocimientoId, (err, conocimiento) => {
+            if (err || !conocimiento) {
                 return res.status(404).send({
                     status: 'error',
-                    message: "No existe la formación solicitada"
+                    message: "No existe el conocimiento solicitado"
                 });
             }
             //Devolver el resultado
             return res.status(404).send({
                 status: 'success',
-                formacion
+                curso
             });
         });
 
@@ -135,25 +132,23 @@ var controller = {
 
     update: (req, res) => {
         //Recoger el ID del artículo por la url
-        var formacionId = req.params.id;
+        var conocimientoId = req.params.id;
 
         //Recoger los datos que llegan por put
         var params = req.body;
         //Validar los datos
         try {
-            var validate_start = !validator.isEmpty(params.inicio);
-            var validate_end = !validator.isEmpty(params.fin);
-            var validate_centro = !validator.isEmpty(params.centro);
-            var validate_titulacion = !validator.isEmpty(params.titulacion);
+            var validate_concepto = !validator.isEmpty(params.concepto);
+            var validate_nivel = !validator.isEmpty(params.nivel);
         } catch (err) {
             return res.status(200).send({
                 status: 'error',
                 message: "Faltan datos por enviar"
             });
         }
-        if (validate_start && validate_end && validate_centro && validate_titulacion) {
+        if (validate_concepto && validate_nivel) {
             //Find and update
-            Formacion.findByIdAndUpdate({ _id: formacionId }, params, { new: true }, (err, formacionUpdated) => {
+            conocimiento.findByIdAndUpdate({ _id: conocimientoId }, params, { new: true }, (err, conocimientoUpdated) => {
                 if (err) {
                     return res.status(404).send({
                         status: 'error',
@@ -161,16 +156,16 @@ var controller = {
                     });
                 }
 
-                if (!formacionUpdated) {
+                if (!conocimientoUpdated) {
                     return res.status(404).send({
                         status: 'error',
-                        message: "No existe la formación"
+                        message: "No existe el concepto"
                     });
                 }
 
                 return res.status(404).send({
                     status: 'success',
-                    formacion: formacionUpdated
+                    curso: conocimientoUpdated
                 });
             });
         } else {
@@ -182,9 +177,9 @@ var controller = {
     },
     delete: (req, res) => {
         // Recoger el id del trabajo a eliminar
-        var formacionId = req.params.id;
+        var conocimientoId = req.params.id;
         // Find and delete
-        Formacion.findOneAndDelete({ _id: formacionId }, (err, formacionDeleted) => {
+        curso.findOneAndDelete({ _id: conocimientoId }, (err, cursoDeleted) => {
             if (err) {
                 return res.status(404).send({
                     status: 'error',
@@ -192,22 +187,22 @@ var controller = {
                 });
             }
 
-            if (!formacionDeleted) {
+            if (!conocimientoDeleted) {
                 return res.status(404).send({
                     status: 'error',
-                    message: "No existe la formación a borrar"
+                    message: "No existe el trabajo a borrar"
                 });
             }
 
             return res.status(404).send({
                 status: 'success',
-                formacion: formacionDeleted
+                curso: conocimientoDeleted
             });
         });
     },
 
     upload: (req, res) => {
-        //Configurar modulo connect-multiparty router/experiencia.js
+        //Configurar modulo connect-multiparty router/curso.js
 
         //Recoger el fichero de la petición
         var file_name = 'imagen no subida...';
@@ -244,11 +239,11 @@ var controller = {
             });
         } else {
             //Si todo es válido
-            var formacionId = req.params.id;
+            var conocimientoId = req.params.id;
             //Buscar artículo asignado al nombre de la imagey actualizarlo
 
-            Formacion.findOneAndUpdate({ _id: formacionId }, { logo: file_name }, { new: true }, (err, formacionUpdated) => {
-                if (err || !formacionUpdated) {
+            conocimiento.findOneAndUpdate({ _id: conocimientoId }, { logo: file_name }, { new: true }, (err, conocimientoUpdated) => {
+                if (err || !conocimientoUpdated) {
                     return res.status(200).send({
                         status: 'error',
                         message: "Error al subir la imagen"
@@ -256,12 +251,12 @@ var controller = {
                 }
                 return res.status(200).send({
                     status: 'success',
-                    experiencia: formacionUpdated
+                    curso: conocimientoUpdated
                 });
             });
-            /* var jobId = req.params.id;
-            Experiencia.findOneAndUpdate({ _id: jobId }, { logo: file_name }, { new: true }, (err, jobUpdated) => {
-            	if (err || !jobUpdated) {
+            /* var cursoId = req.params.id;
+            curso.findOneAndUpdate({ _id: cursoId }, { logo: file_name }, { new: true }, (err, cursoUpdated) => {
+            	if (err || !cursoUpdated) {
             		return res.status(200).send({
             			status: 'error',
             			message: "Error al subir la imagen"
@@ -275,38 +270,36 @@ var controller = {
 
     }, // end upload file
 
-    getTitulo: (req, res) => {
-        var file = req.params.imagen;
-        var path_file = './upload/formaciones/' + file;
-        fs.exists(path_file, (exists) => {
-            if (exists) {
-                return res.sendFile(path.resolve(path_file))
-            } else {
-                return res.status(404).send({
-                    status: 'error',
-                    path_file
-                });
-            }
-        })
-    },
-
-
+    /* getCert: (req, res) => {
+    	var file = req.params.imagen;
+    	var path_file = './upload/cursos/' + file;
+    	fs.exists(path_file, (exists) => {
+    		if (exists) {
+    			return res.sendFile(path.resolve(path_file))
+    		} else {
+    			return res.status(404).send({
+    				status: 'error',
+    				path_file
+    			});
+    		}
+    	})
+    }, */
 
     search: (req, res) => {
         //Sacar String a buscar
         var searchString = req.params.search;
 
         //find or
-        Formacion.find({
+        conocimiento.find({
                 "$or": [
-                    { "centro": { "$regex": searchString, "$options": "i" } },
-                    { "titulacion": { "$regex": searchString, "$options": "i" } }
+                    { "empresa": { "$regex": searchString, "$options": "i" } },
+                    { "puesto": { "$regex": searchString, "$options": "i" } }
                 ]
             })
             .sort([
                 ['inicio', 'descending']
             ])
-            .exec((err, formaciones) => {
+            .exec((err, conocimientos) => {
 
                 if (err) {
                     return res.status(500).send({
@@ -315,7 +308,7 @@ var controller = {
                     });
                 }
 
-                if (!formaciones || formaciones.length <= 0) {
+                if (!conocimientos || conocimientos.length <= 0) {
                     return res.status(404).send({
                         status: 'error',
                         message: 'No se ha encontrado nada',
@@ -324,7 +317,7 @@ var controller = {
 
                 return res.status(200).send({
                     status: 'success',
-                    formaciones
+                    cursos
                 });
             })
 

@@ -8,5 +8,5 @@ export class Conocimiento {
     this.year = year;
     this.image = image;
   } */
-  constructor(public id, public nombre, public porcentaje: number) {}
+  constructor(public _id, public concepto, public nivel: number) {}
 }

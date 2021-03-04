@@ -1,6 +1,6 @@
 <section class="experiencia-item" id="experiencia-template">
 
-    <div class="row">
+    <div class="row" (click)="openTrabajo(modalTrabajo, '{{trabajo._id}}')" aria-label="home">
         <div class="col-1 image-empresa">
             <img src="{{url + 'get-image/' + trabajo.logo}}" alt="{{trabajo.empresa}}" *ngIf="trabajo.logo">
             <img src="assets/images/default.png" alt="{{trabajo.empresa}}" *ngIf="!trabajo.logo">
@@ -16,10 +16,47 @@
         </div>
     </div>
     <div class="clearfix"></div>
-    <a [routerLink]="['/cv/trabajo/', trabajo._id]">
+    <!-- <a [routerLink]="['/cv/trabajo', trabajo._id]">
         <article class="descTrabajo">{{trabajo.descripcion}}
         </article>
-    </a>
+    </a> -->
     <hr />
 
 </section>
+
+
+<!-- Modales -->
+<!-- Modal Certificado -->
+<ng-template #modalTrabajo let-modal>
+    <div id="modalTrabajo">
+        <button type="button" class="close" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+
+        <div class="row">
+            <div class="col-1">
+                <img src="{{url + 'get-image/' + trabajo.logo}}" alt="{{trabajo.empresa}}" *ngIf="trabajo.logo">
+            </div>
+            <div class="col-11">
+                <h2>{{trabajo.empresa}}</h2>
+            </div>
+
+
+        </div>
+        <hr>
+        <span><small>Desde: </small><u>{{trabajo.inicio | date: 'MMMM YYYY'}}</u></span><br />
+        <span *ngIf="trabajo.fin"><small>Hasta: </small><u>{{trabajo.fin | date: 'MMMM YYYY'}}</u></span>
+        <span *ngIf="!trabajo.fin"><small>Hasta: </small><u><strong>Actualmente</strong></u></span>
+
+        <div class="modal-body">
+
+            <p><strong>Puesto</strong>: {{trabajo.puesto}}</p>
+            <p><strong>Descripción de las tareas</strong>: {{trabajo.descripcion}}
+            </p>
+        </div>
+        <hr>
+        <button type="button" class="btn btn-danger btn-modal" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')">
+      Cerrar
+    </button>
+    </div>
+</ng-template>

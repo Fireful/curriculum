@@ -4,3 +4,15 @@
 <div class="clearfix"></div>
 <span id="curso">{{formacion.titulacion}}</span>
 <div class="clearfix"></div>
+
+<button *ngIf="formacion.imagen!=''" class="btn btn-primary btnCert" (click)="openTitulo(modalTitulo, '{{formacion._id}}')" aria-label="home">Ver Certificado
+</button>
+<hr>
+
+
+<!-- Modales -->
+<!-- Modal Certificado -->
+<ng-template #modalTitulo let-modal>
+    <img src="{{url+'get-titulo/'+formacion.imagen}}" alt="{{formacion.titulacion}}" />
+    <!-- <img src="../../../assets/images/certificados/{{curso.imagen}}" /> -->
+</ng-template>

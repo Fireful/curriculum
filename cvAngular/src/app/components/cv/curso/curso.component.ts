@@ -24,7 +24,10 @@ export class CursoComponent implements OnInit {
   openCertificado(modalCertificado, id) {
     this.modalService.dismissAll();
     this.modalService
-      .open(modalCertificado, { ariaLabelledBy: 'modal-basic-title' })
+      .open(modalCertificado, {
+        ariaLabelledBy: 'modal-basic-title',
+        size: 'lg',
+      })
       .result.then(
         (result) => {
           this.closeResult = `Closed with: ${result}`;

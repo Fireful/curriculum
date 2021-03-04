@@ -6,13 +6,19 @@ import { Experiencia } from 'src/app/models/experiencia';
 import { ExperienciaService } from '../../services/experiencia.service';
 import { FormacionService } from 'src/app/services/formacion.service';
 import { CursoService } from 'src/app/services/curso.service';
+import { ConocimientoService } from 'src/app/services/conocimiento.service';
 
 declare var $: any;
 @Component({
   selector: 'app-cv',
   templateUrl: './cv.component.html',
   styleUrls: ['./cv.component.scss'],
-  providers: [ExperienciaService, FormacionService, CursoService],
+  providers: [
+    ExperienciaService,
+    FormacionService,
+    CursoService,
+    ConocimientoService,
+  ],
 })
 export class CvComponent implements OnInit {
   public titulo: string;
@@ -26,7 +32,12 @@ export class CvComponent implements OnInit {
   public cursos: Curso[];
 
   public conocimientos: Conocimiento[];
-  constructor(private _experienciaService: ExperienciaService, private _formacionService: FormacionService, private _cursoService: CursoService) {
+  constructor(
+    private _experienciaService: ExperienciaService,
+    private _formacionService: FormacionService,
+    private _cursoService: CursoService,
+    private _conocimientoService: ConocimientoService
+  ) {
     /* this.titulo = 'Curriculum Vitae';
     this.jobs = [
       new Experiencia(
@@ -68,7 +79,7 @@ export class CvComponent implements OnInit {
         ''
       ),
     ]; */
-    this.cursos = [
+    /* this.cursos = [
       new Curso(
         this.idCurso,
         'C.F.G.S. Desarrollo de Aplicaciones Web',
@@ -86,13 +97,13 @@ export class CvComponent implements OnInit {
 
         'certificados/css.jpg'
       ),
-    ];
-    this.conocimientos = [
+    ]; */
+    /* this.conocimientos = [
       new Conocimiento(this.idConocimiento, 'JavaScript', 75),
       new Conocimiento((this.idConocimiento += 1), 'HTML', 95),
 
       new Conocimiento((this.idConocimiento += 1), 'Java', 50),
-    ];
+    ]; */
   }
 
   ngOnInit(): void {
@@ -109,48 +120,44 @@ export class CvComponent implements OnInit {
     );
 
     this._formacionService.getFormaciones().subscribe(
-      (response)=>{
-        if(response.formaciones){
-          this.formaciones=response.formaciones;
-        }else{
-          console.log("No hay formaciones");
+      (response) => {
+        if (response.formaciones) {
+          this.formaciones = response.formaciones;
+        } else {
+          console.log('No hay formaciones');
         }
       },
-      (error)=>{
+      (error) => {
         console.log(error);
       }
     );
 
     this._cursoService.getCursos().subscribe(
-      (response)=>{
-        if(response.cursos){
-          this.cursos=response.cursos;
-        }else{
-          console.log("No hay cursos")
+      (response) => {
+        if (response.cursos) {
+          this.cursos = response.cursos;
+        } else {
+          console.log('No hay cursos');
         }
       },
-      (error)=>{
+      (error) => {
         console.log(error);
       }
-    )
+    );
 
-    $(document).ready(function () {
-      var bars = $('.progress-bar');
-
-      for (var i = 0; i < bars.length; i++) {
-        console.log(i);
-        var progress = $(bars[i]).attr('aria-valuenow');
-        $(bars[i]).width(progress + '%');
-
-        if (progress >= '65') {
-          $(bars[i]).addClass('bar-success');
-        } else if (progress >= '40' && progress < '65') {
-          $(bars[i]).addClass('bar-warning');
+    this._conocimientoService.getConocimientos().subscribe(
+      (response) => {
+        if (response.conocimientos) {
+          this.conocimientos = response.conocimientos;
         } else {
-          $(bars[i]).addClass('bar-error');
+          console.log('No hay conocimientos');
         }
+      },
+      (error) => {
+        console.log(error);
       }
-    });
+    );
+
     /* for (var j = 1; j < this.jobs.length; j++) {
       $('#titulo-trabajo' + j).click(function () {
         $('#descTrabajo' + j).slideToggle('slow');

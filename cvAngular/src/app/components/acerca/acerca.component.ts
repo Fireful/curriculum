@@ -7,6 +7,8 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
   styleUrls: ['./acerca.component.scss'],
 })
 export class AcercaComponent implements OnInit {
+  public tecnologias: string[];
+
   public nombre: string;
   constructor(private _route: ActivatedRoute, private _router: Router) {}
 
@@ -14,5 +16,23 @@ export class AcercaComponent implements OnInit {
     this._route.params.subscribe((params: Params) => {
       this.nombre = params.nombre;
     });
+    this.tecnologias = [
+      'html',
+      'javascript',
+      'sass',
+      'css3',
+      'less',
+      'bootstrap',
+      'flexbox',
+      'grid',
+      'responsive',
+      'jquery',
+      'jqueryui',
+      'mongodb',
+      'nodejs',
+      'reactjs',
+      'angular',
+      'vue',
+    ];
   }
 }

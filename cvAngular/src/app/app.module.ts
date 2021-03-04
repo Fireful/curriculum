@@ -28,6 +28,7 @@ import { registerLocaleData } from '@angular/common';
 import { FormacionComponent } from './components/cv/formacion/formacion.component';
 import { CursoComponent } from './components/cv/curso/curso.component';
 import { ConocimientoComponent } from './components/cv/conocimiento/conocimiento.component';
+import { MomentModule } from 'angular2-moment';
 registerLocaleData(localeEs, 'es');
 
 @NgModule({
@@ -57,6 +58,7 @@ registerLocaleData(localeEs, 'es');
     BrowserModule,
     NgbModule,
     HttpClientModule,
+    MomentModule,
     routing,
     MatNativeDateModule,
     FormsModule,

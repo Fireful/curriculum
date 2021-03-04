@@ -276,8 +276,8 @@ var controller = {
 
     }, // end upload file
 
-    getImage: (req, res) => {
-        var file = req.params.logo;
+    getCert: (req, res) => {
+        var file = req.params.imagen;
         var path_file = './upload/cursos/' + file;
         fs.exists(path_file, (exists) => {
             if (exists) {
