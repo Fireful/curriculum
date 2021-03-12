@@ -1,33 +1,38 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { User } from 'src/app/models/user_old';
+import { UserService } from 'src/app/services/user.service';
 
 declare var $: any;
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
+  providers: [UserService],
 })
 export class HeaderComponent implements OnInit {
+  public pwd: string;
+  public user: string;
+  public nombre: string;
+  public apellidos: string;
+  public email: string;
+  public password: string;
+  public repassword: string;
   closeResult = '';
-  public userLogin: any;
+  public users: User[];
   public userRegister: any;
-  constructor(private modalService: NgbModal) {
-    this.userLogin = {
-      username: '',
-      password: '',
-    };
-    this.userRegister = {
-      nombre: '',
-      apellidos: '',
-      email: '',
-      password: '',
-      repassword: '',
-    };
-  }
+  constructor(
+    private _userService: UserService,
+    private modalService: NgbModal
+  ) {}
 
   onLogin() {
     alert('Usuario logado');
-    console.log(this.userLogin);
+    alert(this._userService);
+    if (this.pwd != this._userService.getUsers[0]) {
+      alert('ayay');
+    }
+    console.log(this.users);
   }
 
   onRegister() {
@@ -76,5 +81,18 @@ export class HeaderComponent implements OnInit {
     $('button').click(function () {
       $('#jquery').slideToggle('slow');
     });
+
+    /* this._userService.getUsers().subscribe(
+      (response) => {
+        if (response.users) {
+          this.users = response.users;
+        } else {
+          console.log('No hay usuarios');
+        }
+      },
+      (error) => {
+        console.log(error);
+      }
+    ); */
   }
 }

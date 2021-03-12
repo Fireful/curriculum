@@ -29,6 +29,7 @@ import { FormacionComponent } from './components/cv/formacion/formacion.componen
 import { CursoComponent } from './components/cv/curso/curso.component';
 import { ConocimientoComponent } from './components/cv/conocimiento/conocimiento.component';
 import { MomentModule } from 'angular2-moment';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 registerLocaleData(localeEs, 'es');
 
 @NgModule({

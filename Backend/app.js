@@ -6,16 +6,23 @@ var bodyParser = require('body-parser');
 //Ejecutar express
 var app = express();
 
+var user = require('./models/user');
+
 //Cargar ficheros rutas
 var experiencia_routes = require('./routes/experiencia');
 var formacion_routes = require('./routes/formacion');
 var curso_routes = require('./routes/curso');
 var conocimiento_routes = require('./routes/conocimiento');
+var user_routes = require('./routes/user');
+
+
+
 
 
 //Middlewares
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
 //CORS
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
@@ -30,6 +37,8 @@ app.use('/api', experiencia_routes);
 app.use('/api', formacion_routes);
 app.use('/api', curso_routes);
 app.use('/api', conocimiento_routes);
+app.use('/api', user_routes);
+
 
 
 

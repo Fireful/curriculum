@@ -189,10 +189,10 @@ $sombraTexto: 0px 0px 2px $color;
     margin-bottom: 60px;
     ul {
         display: flex;
-        flex-flow: row;
-        flex-direction: row;
         align-items: center;
         justify-content: center;
+        flex-flow: row;
+        flex-direction: row;
         grid-row: 1fr 1fr 1fr 1fr;
         border: 1px solid red;
         border-radius: 10px;
@@ -209,6 +209,9 @@ $sombraTexto: 0px 0px 2px $color;
         }
         li:hover {
             background: #9c9c9c;
+        }
+        .btn-crear {
+            margin-left: 100px;
         }
     }
 }
@@ -247,6 +250,10 @@ $sombraTexto: 0px 0px 2px $color;
 #tabs-habilidades {
     padding: 30px;
     display: none;
+}
+
+.btnAgregar {
+    float: left;
 }
 
 #tabs-experiencia {

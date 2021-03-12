@@ -7,6 +7,9 @@ import { ExperienciaService } from '../../services/experiencia.service';
 import { FormacionService } from 'src/app/services/formacion.service';
 import { CursoService } from 'src/app/services/curso.service';
 import { ConocimientoService } from 'src/app/services/conocimiento.service';
+import { of } from 'rxjs';
+import { delay } from 'rxjs/operators';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 declare var $: any;
 @Component({
@@ -21,92 +24,56 @@ declare var $: any;
   ],
 })
 export class CvComponent implements OnInit {
-  public titulo: string;
+  public datos: string;
+  public titulo: string = ' ';
   public jobs: Experiencia[];
-  public idTrabajo: number = 1;
-  public idFormacion: number = 1;
-  public idConocimiento: number = 1;
-  public idCurso: number = 1;
-  closeResult = '';
   public formaciones: Formacion[];
   public cursos: Curso[];
-
   public conocimientos: Conocimiento[];
+
+  closeResult = '';
+
   constructor(
+    private modalService: NgbModal,
     private _experienciaService: ExperienciaService,
     private _formacionService: FormacionService,
     private _cursoService: CursoService,
     private _conocimientoService: ConocimientoService
-  ) {
-    /* this.titulo = 'Curriculum Vitae';
-    this.jobs = [
-      new Experiencia(
-        this.idTrabajo,
-        '',
-        'Melit',
-        new Date('10/05/2020'),
-        new Date('12/25/2020'),
-        'Programador',
-        'Trabajo con Angular'
-      ),
-      new Experiencia(
-        (this.idTrabajo += 1),
-        '',
-        'Web Financial Group',
-        new Date('12/05/2012'),
-        new Date('08/10/2015'),
-        'Desarrollador web',
-        'Trabajo con HTML'
-      ),
-    ]; */
-    /*  this.formaciones = [
-      new Formacion(
-        this.idFormacion,
-        'C.F.G.S. Desarrollo de Aplicaciones Web',
-        'I.E.S. Vista Alegre',
-        new Date('09/10/2018'),
-        new Date('07/25/2020'),
-        'Texto del curso 1',
-        ''
-      ),
-      new Formacion(
-        (this.idFormacion += 1),
-        'C.F.G.S. Administración de Sistemas Informáticos',
-        'I.E.S. Leonardo da Vinci',
-        new Date('09/10/2002'),
-        new Date('07/25/2004'),
-        'Texto del curso 2',
-        ''
-      ),
-    ]; */
-    /* this.cursos = [
-      new Curso(
-        this.idCurso,
-        'C.F.G.S. Desarrollo de Aplicaciones Web',
-        'Academia Paco',
-        new Date('09/10/2018'),
-        '150 horas',
-        ''
-      ),
-      new Curso(
-        (this.idCurso += 1),
-        'Master en CSS',
-        'Udemy - Victor Robles Web',
-        new Date('09/10/2002'),
-        '150 horas',
+  ) {}
 
-        'certificados/css.jpg'
-      ),
-    ]; */
-    /* this.conocimientos = [
-      new Conocimiento(this.idConocimiento, 'JavaScript', 75),
-      new Conocimiento((this.idConocimiento += 1), 'HTML', 95),
+  public getAsync = of(this.titulo).pipe(delay(5000));
 
-      new Conocimiento((this.idConocimiento += 1), 'Java', 50),
-    ]; */
+  openConfirm(modalConfirm) {
+    this.modalService.dismissAll();
+    this.modalService
+      .open(modalConfirm, { ariaLabelledBy: 'modal-basic-title' })
+      .result.then(
+        (result) => {
+          this.closeResult = `Closed with: ${result}`;
+        },
+        (reason) => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+          alert(this.datos);
+        }
+      );
+  }
+
+  confirma() {
+    alert(this.datos);
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
   }
 
   ngOnInit(): void {
+    alert('Hola');
     this._experienciaService.getJobs().subscribe(
       (response) => {
         if (response.jobs) {

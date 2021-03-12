@@ -11,12 +11,18 @@
                 <li id="tab4">Aptitudes</li>
             </ul>
 
+
             <div id="tabs-formacion">
                 <div id="tituloForm-academica">
                     Formación académica
                 </div>
                 <div class="clearfix"></div>
                 <div id="form-academica">
+                    <div class="btnAgregar">
+
+                        <button class="btn btn-primary">Añadir formación</button>
+                    </div>
+                    <div class="clearfix"></div>
                     <div *ngFor="let formacion of formaciones let i=index;" class="formaciones">
 
                         <app-formacion [formacion]="formacion">
@@ -34,6 +40,10 @@
                 </div>
                 <div class="clearfix"></div>
                 <div id="otra-formacion">
+                    <div class="btnAgregar">
+                        <button class="btn btn-primary">Añadir curso</button>
+                    </div>
+                    <div class="clearfix"></div>
                     <div *ngFor="let curso of cursos let i=index;" class="formaciones">
 
                         <app-curso [curso]="curso">
@@ -51,6 +61,12 @@
             </div>
             <div id="tabs-experiencia">
                 <div id="articles" *ngIf="jobs">
+                    <div class="btnAgregar">
+                        <button class="btn btn-primary">Añadir experiencia</button>
+                    </div>
+
+                    <div class="clearfix"></div>
+                    <hr>
                     <div *ngFor="let job of jobs let i=index;">
 
                         <app-trabajo [trabajo]="job">
@@ -65,6 +81,10 @@
             </div>
 
             <div id="tabs-conocimientos">
+                <div class="btnAgregar">
+                    <button class="btn btn-primary">Añadir conocimiento</button>
+                </div>
+                <div class="clearfix"></div>
                 <div *ngFor="let conocimiento of conocimientos">
                     <app-conocimiento [conocimiento]='conocimiento'>
                     </app-conocimiento>
@@ -114,3 +134,25 @@
 </div>
 
 <!-- Fin Slider -->
+<!-- Modal Cornfirmar -->
+
+<ng-template #modalConfirm let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    </div>
+    <div class="modal-body">
+
+        <div class="mb-3">
+            <label for="username" class="form-label">Usuario</label>
+            <input type="email" class="form-control" id="username" [(ngModel)]="datos" name="username" required pattern="[a-zA-Z]+">
+        </div>
+
+        <button type="button" class="btn btn-primary" (click)="confirma()">Submit</button>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="modal.dismiss('Cross click')">Continnuar como invitado</button>
+        <!-- <button type="button" class="btn btn-primary" (click)="openRegistro(modalRegistro)">Registrar usuario</button> -->
+    </div>
+</ng-template>
