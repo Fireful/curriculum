@@ -12,6 +12,7 @@ import { LoginComponent } from './components/login/login.component';
 import { PeliculasComponent } from './components/peliculas/peliculas.component';
 import { ErrorComponent } from './components/error/error.component';
 import { TrabajoComponent } from './components/cv/trabajo/trabajo.component';
+import { JobNewComponent } from './components/job-new/job-new.component';
 
 //Array de rutas
 const appRoutes: Routes = [
@@ -21,9 +22,8 @@ const appRoutes: Routes = [
   { path: 'portfolio', component: PortfolioComponent },
   { path: 'acerca', component: AcercaComponent },
   { path: 'detalle', component: DetalleComponent },
-  { path: 'cv/trabajo/:id', component: DetalleComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'cv/trabajo', component: TrabajoComponent },
+  { path: 'job-new', component: JobNewComponent },
 
   { path: 'peliculas', component: PeliculasComponent },
   { path: '**', component: ErrorComponent },

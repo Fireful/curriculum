@@ -51,15 +51,15 @@
     </div>
     <div class="modal-body">
 
-        <form #login="ngForm" (ngSubmit)="onLogin()">
+        <form #login="ngForm" (ngSubmit)="onLogin(login)">
             <div class="mb-3">
-                <label for="username" class="form-label">Usuario</label>
-                <input type="email" class="form-control" id="username" [(ngModel)]="user" name="username" required pattern="[a-zA-Z]+">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email" ngModel required>
 
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" [(ngModel)]="pwd" name="password" required pattern="[a-zA-Z]+">
+                <input type="password" class="form-control" id="password" name="password" ngModel required>
 
             </div>
             <button type="submit" class="btn btn-primary" [disabled]="login.invalid">Submit</button>

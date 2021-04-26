@@ -9,6 +9,7 @@ var JobSchema = Schema({
     empresa: String,
     inicio: Date,
     fin: { type: Date, default: Date.now },
+    actualmente: Boolean,
     puesto: String,
     descripcion: String
 

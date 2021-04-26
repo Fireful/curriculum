@@ -73,7 +73,6 @@ export class CvComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    alert('Hola');
     this._experienciaService.getJobs().subscribe(
       (response) => {
         if (response.jobs) {

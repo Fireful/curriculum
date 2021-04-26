@@ -1,9 +1,10 @@
 'use strict'
 
 var validator = require('validator');
-var Experiencia = require('../models/experiencia');
+
 var fs = require('fs');
 var path = require('path');
+var Experiencia = require('../models/experiencia');
 const { exists } = require('../models/experiencia');
 
 var controller = {
@@ -29,10 +30,10 @@ var controller = {
         // validar datos (validator)
         try {
             var validate_start = !validator.isEmpty(params.inicio);
-            var validate_end = !validator.isEmpty(params.fin);
+
             var validate_empresa = !validator.isEmpty(params.empresa);
             var validate_puesto = !validator.isEmpty(params.puesto);
-            var validate_contenido = !validator.isEmpty(params.contenido);
+            var validate_contenido = !validator.isEmpty(params.descripcion);
 
         } catch (err) {
             return res.status(200).send({
@@ -40,7 +41,7 @@ var controller = {
                 message: "Faltan datos por enviar"
             });
         }
-        if (validate_start && validate_end && validate_empresa && validate_puesto && validate_contenido) {
+        if (validate_start && validate_empresa && validate_puesto && validate_contenido) {
 
             //crear objeto a guardar
             var experiencia = new Experiencia();
@@ -48,10 +49,11 @@ var controller = {
             //Asignar valores
             experiencia.inicio = params.inicio;
             experiencia.fin = params.fin;
+            experiencia.actualmente = params.actualmente;
             experiencia.empresa = params.empresa;
             experiencia.puesto = params.puesto;
             experiencia.logo = null;
-            experiencia.contenido = params.contenido;
+            experiencia.descripcion = params.descripcion;
 
             //guardar experiencia
             experiencia.save((err, jobStored) => {
@@ -203,7 +205,7 @@ var controller = {
                 });
             }
 
-            return res.status(404).send({
+            return res.status(200).send({
                 status: 'success',
                 job: jobDeleted
             });
@@ -211,7 +213,9 @@ var controller = {
     },
 
     upload: (req, res) => {
-        //Configurar modulo connect-multiparty router/experiencia.js
+
+
+        //Configurar modulo connect-multiparty router/experiencia.js (Hecho)
 
         //Recoger el fichero de la petición
         var file_name = 'imagen no subida...';
@@ -222,6 +226,7 @@ var controller = {
                 message: file_name
             });
         }
+
         //Conseguir nombre y extensión
         var file_path = req.files.file0.path;
         var file_split = file_path.split('\\');
@@ -234,15 +239,16 @@ var controller = {
 
         //Extensión del archivo
         var extension_split = file_name.split('\.');
-        var file_ext = extension_split[1].toLowerCase();
+        var file_ext = extension_split[1];
 
-        //Comprobar la extensión (sólo imagener)
+        //Comprobar la extensión (sólo imagenes)
         if (file_ext != 'png' && file_ext != 'jpg' && file_ext != 'jpeg' && file_ext != 'gif') {
+
             //borrar el fichero
             fs.unlink(file_path, (err) => {
-                return res.status(200).send({
+                return res.status(404).send({
                     status: 'error',
-                    message: "La extensión " + file_ext + " no es válida",
+                    message: "La extensión " + file_ext + " no es válida"
 
                 });
             });
@@ -251,32 +257,40 @@ var controller = {
             var jobId = req.params.id;
             //Buscar artículo asignado al nombre de la imagey actualizarlo
 
-            Experiencia.findOneAndUpdate({ _id: jobId }, { logo: file_name }, { new: true }, (err, jobUpdated) => {
-                if (err || !jobUpdated) {
-                    return res.status(200).send({
-                        status: 'error',
-                        message: "Error al subir la imagen"
-                    });
-                }
-                return res.status(200).send({
-                    status: 'success',
-                    experiencia: jobUpdated
-                });
-            });
-            /* var jobId = req.params.id;
-            Experiencia.findOneAndUpdate({ _id: jobId }, { logo: file_name }, { new: true }, (err, jobUpdated) => {
-            	if (err || !jobUpdated) {
-            		return res.status(200).send({
-            			status: 'error',
-            			message: "Error al subir la imagen"
-            		});
-            	}
+            if (jobId) {
+                Experiencia.findOneAndUpdate({ _id: jobId }, { logo: file_name }, { new: true }, (err, jobUpdated) => {
+                    if (err || !jobUpdated) {
+                        return res.status(200).send({
 
-            }); */
+                            status: 'error',
+                            message: "Error al subir la imagen"
+                        });
+                    }
+                    return res.status(200).send({
+                        status: "success",
+                        experiencia: jobUpdated
+                    });
+                });
+            } else {
+                return res.status(200).send({
+                    "status": 'success',
+                    "logo": file_name,
+                    "message": "Todo correcto",
+                    "extension": file_ext
+                })
+            }
+
+
 
 
         }
 
+        return res.status(404).send({
+            fichero: req.files,
+            split: file_split,
+            nombre_fichero: file_name,
+            file_ext
+        });
     }, // end upload file
 
     getImage: (req, res) => {

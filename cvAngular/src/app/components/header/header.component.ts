@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { User } from 'src/app/models/user_old';
-import { UserService } from 'src/app/services/user.service';
+import { Router } from '@angular/router';
 
 declare var $: any;
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
-  providers: [UserService],
 })
 export class HeaderComponent implements OnInit {
+  public router: Router;
   public pwd: string;
   public user: string;
   public nombre: string;
@@ -19,20 +18,19 @@ export class HeaderComponent implements OnInit {
   public password: string;
   public repassword: string;
   closeResult = '';
-  public users: User[];
   public userRegister: any;
   constructor(
-    private _userService: UserService,
     private modalService: NgbModal
   ) {}
 
-  onLogin() {
-    alert('Usuario logado');
-    alert(this._userService);
-    if (this.pwd != this._userService.getUsers[0]) {
-      alert('ayay');
-    }
-    console.log(this.users);
+  /*  onLogin(form) {
+    alert(form.value);
+    this._userService.login(form.value).subscribe((res) => {
+      this.router.navigateByUrl('user/login');
+    });
+  } */
+  onLogin(form){
+    alert("onLogin");
   }
 
   onRegister() {

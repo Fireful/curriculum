@@ -30,37 +30,51 @@ var controller = {
 
     login: (req, res) => {
         var params = req.body;
-        var userData = {
-            nombre: params.nombre,
-            apellidos: params.apellidos,
-            email: params.email,
-            password: params.password
-        }
-        User.findOne({ email: userData.email }, (err, user) => {
-            console.log('YYYYYYYYYYYYYYYYY', err);
-            if (err) return res.status(500).send('Error en la autenticación');
-            if (!user) {
-                res.status(404).send({ message: "Usuario no encontrado" });
-            } else {
-                const resultPassword = bcrypt.compareSync(userData.password, user.password);
-                if (resultPassword) {
-                    const expiresIn = 24 * 60 * 60;
-                    const accessToken = jwt.sign({ id: userData.id }, SECRET_KEY, { expiresIn: expiresIn });
-                    const dataUser = {
-                        nombre: user.nombre,
-                        email: user.email,
-                        accessToken: accessToken,
-                        expiresIn: expiresIn,
+        console.log("parametros", params);
 
-                    }
-                    res.status(200).send({
-                        dataUser
-                    });
-                } else {
-                    res.status(409).send({ message: 'Something is wrong' });
-                }
+
+        if (!params.email || !params.password) {
+            res.status(500).send({
+                params,
+                message: "No has metido datos"
+            });
+
+        } else {
+            var userData = {
+                nombre: params.nombre,
+                apellidos: params.apellidos,
+                email: params.email,
+                password: params.password
             }
-        })
+
+            User.findOne({ email: userData.email }, (err, user) => {
+                console.log('YYYYYYYYYYYYYYYYY', user);
+                if (err) return res.status(500).send('Error en la autenticación');
+                if (!user) {
+                    res.status(409).send({ message: "Usuario no encontrado" });
+                } else {
+                    const resultPassword = bcrypt.compareSync(userData.password, user.password);
+                    if (resultPassword) {
+                        const expiresIn = 24 * 60 * 60;
+                        const accessToken = jwt.sign({ id: userData.id }, SECRET_KEY, { expiresIn: expiresIn });
+                        const dataUser = {
+                            id: user._id,
+                            nombre: user.nombre,
+                            apellidos: user.apellidos,
+                            email: user.email,
+                            accessToken: accessToken,
+                            expiresIn: expiresIn,
+
+                        }
+                        res.status(200).send({
+                            dataUser
+                        });
+                    } else {
+                        res.status(409).send({ message: 'Something is wrong' });
+                    }
+                }
+            })
+        }
     },
 
     register: (req, res) => {
@@ -196,9 +210,10 @@ var controller = {
         //recoger id de la url
         var userId = req.params._id;
 
+
         //Comprobar que existe
         if (!userId || userId == null) {
-            return res.status(404).send({
+            return res.status(409).send({
                 status: 'error',
                 message: "No existe el usuario selecionado"
             });
@@ -206,13 +221,13 @@ var controller = {
         //Buscar el artículo
         User.findById(userId, (err, user) => {
             if (err || !user) {
-                return res.status(404).send({
+                return res.status(409).send({
                     status: 'error',
                     message: "No existe el usuario solicitado"
                 });
             }
             //Devolver el resultado
-            return res.status(404).send({
+            return res.status(200).send({
                 status: 'success',
                 user
             });

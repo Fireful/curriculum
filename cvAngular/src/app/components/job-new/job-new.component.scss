@@ -1,0 +1,63 @@
+.contenedor {
+    text-align: center;
+    width: 50%;
+    background: #ebebeb;
+    border-radius: 10px;
+}
+
+#desc {
+    overflow: auto;
+    height: 85px;
+    resize: none;
+}
+
+.formulario {
+    width: 100%;
+    display: grid;
+    grid-auto-rows: 100%;
+    grid-template-columns: repeat(1, 1fr);
+    padding: 5px;
+    #empres,
+    #descJob,
+    #puesto {
+        width: 95%;
+    }
+    #inicio,
+    #fin {
+        width: 70%;
+        float: left;
+    }
+}
+
+.row {
+    width: 300%;
+}
+
+.logoContainer {
+    border: 1px solid green;
+    margin: 5px;
+    display: flex;
+    align-items: center;
+    .imgLogo {
+        background: red;
+        height: 100px;
+        width: 100px;
+        border: 1px solid blue;
+    }
+    .fileLogo {
+        margin: 0 auto;
+    }
+}
+
+.botones {
+    display: flex;
+    justify-content: space-between;
+}
+
+#btnLimpiar {
+    align-self: flex-end;
+}
+
+button {
+    margin: 5px;
+}

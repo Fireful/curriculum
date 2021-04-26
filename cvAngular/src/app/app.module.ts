@@ -1,7 +1,6 @@
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { routing, appRoutingProviders } from './app.routing';
-import { MatNativeDateModule } from '@angular/material/core';
 import { EsParPipe } from './pipes/espar.pipe';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -29,7 +28,9 @@ import { FormacionComponent } from './components/cv/formacion/formacion.componen
 import { CursoComponent } from './components/cv/curso/curso.component';
 import { ConocimientoComponent } from './components/cv/conocimiento/conocimiento.component';
 import { MomentModule } from 'angular2-moment';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { JobNewComponent } from './components/job-new/job-new.component';
+import { MaterialModule } from './material/material.module';
+import { AngularFileUploaderModule } from 'angular-file-uploader';
 registerLocaleData(localeEs, 'es');
 
 @NgModule({
@@ -54,15 +55,16 @@ registerLocaleData(localeEs, 'es');
     CursoComponent,
     EsParPipe,
     ConocimientoComponent,
+    JobNewComponent,
   ],
   imports: [
     BrowserModule,
     NgbModule,
     HttpClientModule,
     MomentModule,
+    MaterialModule,
+    AngularFileUploaderModule,
     routing,
-    MatNativeDateModule,
-    FormsModule,
   ],
   providers: [appRoutingProviders, { provide: LOCALE_ID, useValue: 'es' }],
   bootstrap: [AppComponent],

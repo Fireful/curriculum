@@ -61,9 +61,12 @@
             </div>
             <div id="tabs-experiencia">
                 <div id="articles" *ngIf="jobs">
-                    <div class="btnAgregar">
-                        <button class="btn btn-primary">Añadir experiencia</button>
-                    </div>
+                    <a [routerLink]="['/job-new']">
+                        <div class="btnAgregar">
+
+                            <button class="btn btn-primary">Añadir experiencia</button>
+                        </div>
+                    </a>
 
                     <div class="clearfix"></div>
                     <hr>
