@@ -76,7 +76,7 @@ export class JobNewComponent implements OnInit {
   afuConfig = {
     multiple: false,
     formatsAllowed: '.jpg, .png, .jpeg, .gif',
-    maxSize: 2,
+    maxSize: 50,
     uploadAPI: {
       url: Global.url + 'upload-image',
     },
@@ -162,6 +162,7 @@ export class JobNewComponent implements OnInit {
           this.status = 'success';
           this.experiencia = response.experiencia;
           this._router.navigate(['/cv']);
+          console.log(this.experiencia);
         } else {
           this.status = 'error';
         }
@@ -174,14 +175,9 @@ export class JobNewComponent implements OnInit {
   }
 
   logoUpload(data) {
-    //var logo_data = JSON.parse(data);
-    /* this.experiencia.logo = logo_data.image; */
-    //alert(logo_data);
-    var logo_data = JSON.stringify(data);
-    alert(logo_data);
-    var logo = JSON.parse(data);
-    console.log('Datos: ' + logo.logo);
+    this.experiencia.logo = data.body.logo;
   }
+
   btnCancelar() {
     this._router.navigate(['/cv']);
   }
@@ -191,6 +187,7 @@ export class JobNewComponent implements OnInit {
       empres: [null],
       puest: [null],
       descJob: [null],
+
       inicio: [null],
       fin: [null],
     });

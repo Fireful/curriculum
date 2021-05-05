@@ -27,6 +27,7 @@ var controller = {
         //recoger parámetros por post
         var params = req.body;
 
+
         // validar datos (validator)
         try {
             var validate_start = !validator.isEmpty(params.inicio);
@@ -52,7 +53,10 @@ var controller = {
             experiencia.actualmente = params.actualmente;
             experiencia.empresa = params.empresa;
             experiencia.puesto = params.puesto;
-            experiencia.logo = null;
+
+            experiencia.logo = params.logo;
+
+
             experiencia.descripcion = params.descripcion;
 
             //guardar experiencia
@@ -141,16 +145,15 @@ var controller = {
     update: (req, res) => {
         //Recoger el ID del artículo por la url
         var jobId = req.params.id;
+        console.log(jobId);
 
         //Recoger los datos que llegan por put
         var params = req.body;
         //Validar los datos
         try {
-            var validate_start = !validator.isEmpty(params.inicio);
+
             var validate_end = !validator.isEmpty(params.fin);
-            var validate_empresa = !validator.isEmpty(params.empresa);
-            var validate_puesto = !validator.isEmpty(params.puesto);
-            var validate_contenido = !validator.isEmpty(params.contenido);
+
         } catch (err) {
             return res.status(200).send({
                 status: 'error',

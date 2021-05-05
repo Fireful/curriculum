@@ -24,4 +24,17 @@ export class ExperienciaService {
 
     return this._http.post(this.url + 'save', params, { headers: headers });
   }
+
+  update(id, experiencia): Observable<any> {
+    let params = JSON.stringify(experiencia);
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+    return this._http.put(this.url + 'job/' + id, params, { headers: headers });
+  }
+
+  delete(id): Observable<any> {
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+    return this._http.delete(this.url + 'job/' + id, { headers: headers });
+  }
 }
