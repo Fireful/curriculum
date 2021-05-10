@@ -18,6 +18,10 @@ export class ExperienciaService {
     return this._http.get(this.url + 'jobs');
   }
 
+  getJob(jobId): Observable<any> {
+    return this._http.get(this.url + 'job/' + jobId);
+  }
+
   create(experiencia): Observable<any> {
     let params = JSON.stringify(experiencia);
     let headers = new HttpHeaders().set('Content-Type', 'application/json');

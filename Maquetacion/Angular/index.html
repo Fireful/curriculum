@@ -5,10 +5,18 @@
     <title>CV Javier Casas</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/forms/floating-labels/">
     <link href="assets/css/styles.css" rel="stylesheet">
     <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <link href="assets/css/bootstrap5.css" rel="stylesheet">
+
     <script src="assets/js/script.js"></script>
     <script src="assets/js/jquery-3.5.1.js"></script>
+    <script>
+        $(function() {
+            $("#datepicker").datepicker();
+        });
+    </script>
 
 </head>
 
@@ -27,8 +35,7 @@
                 <ul>
                     <li><a href="index.html"><button type="button"
                                 class="btn btn-primary enlaceMenu">Inicio</button></a></li>
-                    <li><button type="button" class="btn btn-primary enlaceMenu" data-bs-toggle="modal"
-                            data-bs-target="#modalDatosPersonales">
+                    <li><button type="button" class="btn btn-primary enlaceMenu" data-bs-toggle="modal" data-bs-target="#modalDatosPersonales">
                             Datos personales
                         </button></li>
                     <li><a href="#"><button type="button" class="btn btn-primary enlaceMenu">Formulario</button></a>
@@ -110,8 +117,7 @@
     </footer>
 
     <!-- Modales -->
-    <div class="modal fade" id="modalDatosPersonales" tabindex="-1" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="modalDatosPersonales" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -125,8 +131,7 @@
                     <span class="lateral">Población: </span>Madrid - 28038<br />
                     <span class="lateral">Teléfono: </span>666200214<br />
                     <span class="lateral">Carnet de conducir: </span>B1<br />
-                    <span class="lateral">e-mail: </span><a
-                        href="mailto:javier.casas79@gmail.com">javier.casas79@gmail.com</a><br />
+                    <span class="lateral">e-mail: </span><a href="mailto:javier.casas79@gmail.com">javier.casas79@gmail.com</a><br />
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -136,7 +141,9 @@
         </div>
     </div>
 
-    <script src="assets/js/bootstrap.bundle.js"></script>
+    <!-- <script src="assets/js/bootstrap.bundle.js"></script> -->
+    <script src="assets/js/bootstrap5.bundle.js"></script>
+
 </body>
 
 </html>

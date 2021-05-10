@@ -72,6 +72,7 @@ export class JobNewComponent implements OnInit {
   createJob: FormGroup;
   actual: boolean = false;
   public status: string;
+  public is_edit: boolean;
 
   afuConfig = {
     multiple: false,
@@ -144,11 +145,15 @@ export class JobNewComponent implements OnInit {
   limpiar() {
     this.experiencia.empresa = '';
     this.experiencia.puesto = '';
+    this.experiencia.descripcion = '';
+    this.experiencia.inicio = null;
+    this.experiencia.fin = null;
+    this.experiencia.descripcion = '';
 
     this.createJob = this.formBuilder.group({
       fileLogo: [null],
-      empres: [null],
-      puest: [null],
+      empresa: [null],
+      puesto: [null],
       descJob: [null],
       inicio: [this.inicio.setValue(moment())],
       fin: [this.fin.setValue(moment())],

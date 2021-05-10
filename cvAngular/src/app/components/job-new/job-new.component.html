@@ -1,4 +1,12 @@
-<app-slider [nombre]="'Registro de nuevo empleo'" [size]="'small'"></app-slider>
+<span *ngIf="!is_edit">
+  <app-slider
+    [nombre]="'Registro de nuevo empleo'"
+    [size]="'small'"
+  ></app-slider>
+</span>
+<span *ngIf="is_edit">
+  <app-slider [nombre]="'Actualizar empleo'" [size]="'small'"></app-slider>
+</span>
 
 <div class="container contenedor">
     <form #createJob="ngForm" (ngSubmit)="onSubmit()" class="formulario">
@@ -9,83 +17,191 @@
                 </angular-file-uploader>
             </div>
         </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Empresa</span>
+                    <input type="text" class="form-control" placeholder="Empresa" #empresa="ngModel" name="empresa" id="empres" aria-label="Empresa" aria-describedby="basic-addon1" [(ngModel)]="experiencia.empresa" />
+                    <span class="input-group-text" id="basic-addon1"><mat-icon matSuffix>work</mat-icon></span
+          >
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">Puesto</span>
+                    <input type="text" class="form-control" placeholder="Puesto" #puesto="ngModel" name="puesto" id="puesto" aria-label="Puesto" aria-describedby="basic-addon1" [(ngModel)]="experiencia.puesto" />
+                    <span class="input-group-text" id="basic-addon1"><mat-icon matSuffix>person</mat-icon></span
+          >
+        </div>
+      </div>
+    </div>
 
-        <mat-grid-list cols="2" rowHeight="6:1">
-            <mat-grid-tile>
-                <mat-form-field class="form-field" appearance="standard" id="empres">
-                    <mat-label>Empresa</mat-label>
-                    <input matInput name="empresa" #empresa="ngModel" placeholder="Introduce Empresa" [(ngModel)]="experiencia.empresa" required name="empresa" />
-                    <mat-icon matSuffix> work </mat-icon>
-                </mat-form-field>
-                <!-- <small *ngIf="!empresa.valid && empresa.touched">
-          El texto introducido no es válido
-        </small> -->
-            </mat-grid-tile>
+    <div class="row">
+      <div class="col-4">
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">Inicio</span>
+                    <input type="date" class="form-control" placeholder="Inicio" #inicio="ngModel" name="inicio" id="inicio" aria-label="Inicio" aria-describedby="basic-addon1" [(ngModel)]="experiencia.inicio" />
+                    <span class="input-group-text" id="basic-addon1"><mat-icon matSuffix>today</mat-icon></span
+          >
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">Fin</span>
+                    <input type="date" [readonly]="actual" class="form-control" placeholder="Fin" #inicio="ngModel" name="fin" id="fin" aria-label="Fin" aria-describedby="basic-addon1" [(ngModel)]="experiencia.fin" />
+                    <span class="input-group-text" id="basic-addon1"><mat-icon matSuffix>today</mat-icon></span
+          >
+        </div>
+      </div>
+      <div class="col-4">
+        <mat-checkbox name="actual" (change)="check()">
+          Actualmente
+        </mat-checkbox>
+      </div>
+    </div>
 
-            <mat-grid-tile>
-                <mat-form-field class="form-field" appearance="standard" id="puesto">
-                    <mat-label>Puesto</mat-label>
-                    <input matInput #puesto="ngModel" placeholder="Introduce puesto" [(ngModel)]="experiencia.puesto" required name="puesto" />
-                    <mat-icon matSuffix> person </mat-icon>
-                </mat-form-field>
-                <br />
-                <!--  <small *ngIf="!puesto.valid && puesto.touched">
-          El texto introducido no es válido
-        </small> -->
-            </mat-grid-tile>
-        </mat-grid-list>
-        <mat-grid-list cols="3" rowHeight="3:1">
-            <mat-grid-tile>
-                <mat-form-field appearance="fill">
-                    <mat-label> Inicio </mat-label>
-                    <input matInput [matDatepicker]="dpInicio" #inicio="ngModel" [(ngModel)]="experiencia.inicio" required name="inicio" />
-                    <mat-datepicker-toggle matSuffix [for]="dpInicio"></mat-datepicker-toggle>
-                    <mat-datepicker #dpInicio startView="multi-year" (yearSelected)="chosenYearHandler($event)" (monthSelected)="chosenMonthHandler($event, dpInicio)" panelClass="example-month-picker">
-                    </mat-datepicker>
-                </mat-form-field>
-                <small *ngIf="!inicio.valid && inicio.touched">
+    <!-- <mat-grid-list cols="2" rowHeight="6:1">
+      <mat-grid-tile>
+        <mat-form-field class="form-field" appearance="standard" id="empres">
+          <mat-label>Empresa</mat-label>
+          <input
+            matInput
+            name="empresa"
+            #empresa="ngModel"
+            placeholder="Introduce Empresa"
+            [(ngModel)]="experiencia.empresa"
+            required
+            name="empresa"
+          />
+          <mat-icon matSuffix> work </mat-icon>
+        </mat-form-field>
+        - <small *ngIf="!empresa.valid && empresa.touched">
           El texto introducido no es válido
         </small>
-            </mat-grid-tile>
-            <mat-grid-tile>
-                <mat-form-field appearance="standard">
-                    <mat-label> Fin </mat-label>
-                    <input matInput name="fin" [matDatepicker]="dpFin" #fin="ngModel" [(ngModel)]="experiencia.fin" />
-                    <mat-datepicker-toggle matSuffix [for]="dpFin"></mat-datepicker-toggle>
-                    <mat-datepicker #dpFin startView="multi-year" (yearSelected)="chosenYearHandler($event)" (monthSelected)="chosenMonthHandler($event, dpFin)" panelClass="example-month-picker">
-                    </mat-datepicker>
-                </mat-form-field>
-            </mat-grid-tile>
-            <mat-grid-tile>
-                <mat-checkbox name="actual" (change)="check()">
-                    Actualmente
-                </mat-checkbox>
-            </mat-grid-tile>
-        </mat-grid-list>
-        <mat-grid-list cols="1" rowHeight="6:1">
-            <mat-grid-tile>
-                <mat-form-field class="form-field" appearance="outline" id="descJob">
-                    <mat-label>Descripción del puesto</mat-label>
-                    <textarea matInput name="descJob" id="desc" #descJob="ngModel" placeholder="Introduce la descripción del puesto" [(ngModel)]="experiencia.descripcion" required></textarea>
-                </mat-form-field>
-                <small *ngIf="!descJob.valid && descJob.touched">
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field class="form-field" appearance="standard" id="puesto">
+          <mat-label>Puesto</mat-label>
+          <input
+            matInput
+            #puesto="ngModel"
+            placeholder="Introduce puesto"
+            [(ngModel)]="experiencia.puesto"
+            required
+            name="puesto"
+          />
+          <mat-icon matSuffix> person </mat-icon>
+        </mat-form-field>
+        <br />
+        <small *ngIf="!puesto.valid && puesto.touched">
           El texto introducido no es válido
         </small>
-            </mat-grid-tile>
-        </mat-grid-list>
+      </mat-grid-tile>
+    </mat-grid-list> -->
+    <!--  <mat-grid-list cols="3" rowHeight="3:1">
+      <mat-grid-tile>
+        <mat-form-field appearance="fill">
+          <mat-label> Inicio </mat-label>
+          <input
+            matInput
+            [matDatepicker]="dpInicio"
+            #inicio="ngModel"
+            [(ngModel)]="experiencia.inicio"
+            required
+            name="inicio"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="dpInicio"
+          ></mat-datepicker-toggle>
+          <mat-datepicker
+            #dpInicio
+            startView="multi-year"
+            (yearSelected)="chosenYearHandler($event)"
+            (monthSelected)="chosenMonthHandler($event, dpInicio)"
+            panelClass="example-month-picker"
+          >
+          </mat-datepicker>
+        </mat-form-field>
+       <small *ngIf="!inicio.valid && inicio.touched">
+          El texto introducido no es válido
+       </small>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <mat-form-field appearance="standard">
+          <mat-label> Fin </mat-label>
+          <input
+            [readonly]="actual"
+            matInput
+            name="fin"
+            [matDatepicker]="dpFin"
+            #fin="ngModel"
+            [(ngModel)]="experiencia.fin"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="dpFin"
+          ></mat-datepicker-toggle>
+          <mat-datepicker
+            #dpFin
+            startView="multi-year"
+            (yearSelected)="chosenYearHandler($event)"
+            (monthSelected)="chosenMonthHandler($event, dpFin)"
+            panelClass="example-month-picker"
+          >
+          </mat-datepicker>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <mat-checkbox name="actual" (change)="check()">
+          Actualmente
+        </mat-checkbox>
+      </mat-grid-tile>
+    </mat-grid-list> -->
+    <mat-grid-list cols="1" rowHeight="6:1">
+      <mat-grid-tile>
+        <mat-form-field class="form-field" appearance="outline" id="descJob">
+          <mat-label>Descripción del puesto</mat-label>
+          <textarea
+            matInput
+            name="descJob"
+            id="desc"
+            #descJob="ngModel"
+            placeholder="Introduce la descripción del puesto"
+            [(ngModel)]="experiencia.descripcion"
+            required
+          ></textarea>
+        </mat-form-field>
+        <!-- <small *ngIf="!descJob.valid && descJob.touched">
+          El texto introducido no es válido
+        </small> -->
+      </mat-grid-tile>
+    </mat-grid-list>
 
-        <div class="botones">
-            <div class="botonesDerecha">
-                <button type="button" mat-raised-button color="accent" (click)="limpiar()" id="btnCancelar">
+    <div class="botones">
+      <div class="botonesDerecha">
+        <button
+          type="button"
+          mat-raised-button
+          color="accent"
+          (click)="limpiar()"
+          id="btnCancelar"
+        >
           limpiar
         </button>
-                <button mat-raised-button id="btnCancelar" color="warn" (click)="btnCancelar()">
+        <button
+          mat-raised-button
+          id="btnCancelar"
+          color="warn"
+          (click)="btnCancelar()"
+        >
           Cancelar
         </button>
-            </div>
-            <button type="submit" mat-raised-button color="primary" id="btnCrear">
+      </div>
+      <button type="submit" mat-raised-button color="primary" id="btnCrear">
         Crear
       </button>
-        </div>
-    </form>
+    </div>
+  </form>
 </div>

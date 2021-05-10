@@ -13,6 +13,7 @@ import { PeliculasComponent } from './components/peliculas/peliculas.component';
 import { ErrorComponent } from './components/error/error.component';
 import { TrabajoComponent } from './components/cv/trabajo/trabajo.component';
 import { JobNewComponent } from './components/job-new/job-new.component';
+import { JobUpdateComponent } from './components/job-update/job-update.component';
 
 //Array de rutas
 const appRoutes: Routes = [
@@ -24,6 +25,7 @@ const appRoutes: Routes = [
   { path: 'detalle', component: DetalleComponent },
   { path: 'login', component: LoginComponent },
   { path: 'job-new', component: JobNewComponent },
+  { path: 'job-update/:id', component: JobUpdateComponent },
 
   { path: 'peliculas', component: PeliculasComponent },
   { path: '**', component: ErrorComponent },

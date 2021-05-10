@@ -1,8 +1,7 @@
 <app-slider [nombre]="'Currículum'" [size]="'small'"></app-slider>
 <div class="center">
-
     <section id="content">
-        <h1>{{titulo}}</h1>
+        <h1>{{ titulo }}</h1>
         <div id="tabs">
             <ul>
                 <li id="tab1">Formación</li>
@@ -11,76 +10,52 @@
                 <li id="tab4">Aptitudes</li>
             </ul>
 
-
             <div id="tabs-formacion">
-                <div id="tituloForm-academica">
-                    Formación académica
-                </div>
+                <div id="tituloForm-academica">Formación académica</div>
                 <div class="clearfix"></div>
                 <div id="form-academica">
                     <div class="btnAgregar">
-
                         <button class="btn btn-primary">Añadir formación</button>
                     </div>
                     <div class="clearfix"></div>
-                    <div *ngFor="let formacion of formaciones let i=index;" class="formaciones">
-
-                        <app-formacion [formacion]="formacion">
-
-                        </app-formacion>
-
-
+                    <div *ngFor="let formacion of formaciones; let i = index" class="formaciones">
+                        <app-formacion [formacion]="formacion"> </app-formacion>
                     </div>
 
                     <div class="clearfix"></div>
                 </div>
                 <div class="clearfix"></div>
-                <div id="tituloOtra-formacion">
-                    Otra formación
-                </div>
+                <div id="tituloOtra-formacion">Otra formación</div>
                 <div class="clearfix"></div>
                 <div id="otra-formacion">
                     <div class="btnAgregar">
                         <button class="btn btn-primary">Añadir curso</button>
                     </div>
                     <div class="clearfix"></div>
-                    <div *ngFor="let curso of cursos let i=index;" class="formaciones">
-
-                        <app-curso [curso]="curso">
-
-                        </app-curso>
-
-
+                    <div *ngFor="let curso of cursos; let i = index" class="formaciones">
+                        <app-curso [curso]="curso"> </app-curso>
                     </div>
                     <div class="curso" *ngFor="let formacion of formaciones">
                         <div class="clearfix"></div>
-
                     </div>
                 </div>
-
             </div>
             <div id="tabs-experiencia">
                 <div id="articles" *ngIf="jobs">
                     <a [routerLink]="['/job-new']">
                         <div class="btnAgregar">
-
                             <button class="btn btn-primary">Añadir experiencia</button>
                         </div>
                     </a>
 
                     <div class="clearfix"></div>
-                    <hr>
-                    <div *ngFor="let job of jobs let i=index;">
-
-                        <app-trabajo [trabajo]="job">
-
-                        </app-trabajo>
+                    <hr />
+                    <div *ngFor="let job of jobs; let i = index">
+                        <app-trabajo [trabajo]="job"> </app-trabajo>
                     </div>
 
                     <!-- AÑADIR ARTÍCULOS VÍA JS -->
                 </div>
-
-
             </div>
 
             <div id="tabs-conocimientos">
@@ -89,12 +64,10 @@
                 </div>
                 <div class="clearfix"></div>
                 <div *ngFor="let conocimiento of conocimientos">
-                    <app-conocimiento [conocimiento]='conocimiento'>
-                    </app-conocimiento>
+                    <app-conocimiento [conocimiento]="conocimiento"> </app-conocimiento>
                     <div class="clearfix"></div>
                 </div>
                 <div class="clearfix"></div>
-
 
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel eos, explicabo quaerat commodi, impedit iusto reprehenderit praesentium consequatur sunt ab excepturi maxime quisquam aspernatur. Nobis fugiat culpa rem id inventore, distinctio reiciendis delectus
                 nesciunt placeat saepe quia quae ipsa quis molestiae atque sed illum, nam, quasi ipsam. Ipsum qui totam impedit deleniti velit incidunt nostrum quisquam rem praesentium voluptate laboriosam quod tenetur, perspiciatis corporis maxime blanditiis
@@ -118,20 +91,19 @@
                 fugiat eius laudantium! Temporibus.
             </div>
             <div id="tabs-habilidades">
-                <p>okpompomMauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora
-                    torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.
+                <p>
+                    okpompomMauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia
+                    nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.
                 </p>
-                <p>Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti. Donec mattis, pede vel pharetra
-                    blandit, magna ligula faucibus eros, id euismod lacus dolor eget odio. Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit
-                    eu tellus interdum rutrum. Maecenas commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.
+                <p>
+                    Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti. Donec mattis, pede vel pharetra blandit, magna
+                    ligula faucibus eros, id euismod lacus dolor eget odio. Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit eu tellus interdum
+                    rutrum. Maecenas commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.
                 </p>
             </div>
         </div>
 
         <!-- listado artículos-->
-
-
-
     </section>
     <app-sidebar></app-sidebar>
 </div>
@@ -142,20 +114,24 @@
 <ng-template #modalConfirm let-modal>
     <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Login</h5>
-        <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
     </div>
     <div class="modal-body">
-
         <div class="mb-3">
             <label for="username" class="form-label">Usuario</label>
-            <input type="email" class="form-control" id="username" [(ngModel)]="datos" name="username" required pattern="[a-zA-Z]+">
+            <input type="email" class="form-control" id="username" [(ngModel)]="datos" name="username" required pattern="[a-zA-Z]+" />
         </div>
 
-        <button type="button" class="btn btn-primary" (click)="confirma()">Submit</button>
-
+        <button type="button" class="btn btn-primary" (click)="confirma()">
+      Submit
+    </button>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="modal.dismiss('Cross click')">Continnuar como invitado</button>
+        <button type="button" class="btn btn-secondary" (click)="modal.dismiss('Cross click')">
+      Continnuar como invitado
+    </button>
         <!-- <button type="button" class="btn btn-primary" (click)="openRegistro(modalRegistro)">Registrar usuario</button> -->
     </div>
 </ng-template>

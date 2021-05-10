@@ -77,7 +77,8 @@
         type="button"
         class="btn btn-info btn-modal"
         aria-describedby="modal-edit"
-        (click)="editTrabajo(modalEditTrabajo, '{{trabajo._id}}')"
+        [routerLink]="['/job-update', trabajo._id]"
+        (click)="modal.dismiss('Cross click')"
       >
         Editar
       </button>
@@ -118,20 +119,31 @@
                     <div class="modal-body">
                         <p><strong>Puesto</strong>: {{ trabajo.puesto }}</p>
                         <p>
-                            <strong>Descripción de las tareas</strong>: {{ trabajo.descripcion }}
-                        </p>
-                    </div>
-                    <hr />
-                    <div class="botones">
-                        <div class="botonesDerecha">
-                            <button type="button" class="btn btn-info btn-modal" aria-describedby="modal-edit" (click)="updateTrabajo(trabajo._id)">
+                            <strong>Descripción de las tareas</strong>: <br /><textarea></textarea
+          >{{ trabajo.descripcion }}
+        </p>
+      </div>
+      <hr />
+      <div class="botones">
+        <div class="botonesDerecha">
+          <button
+            type="button"
+            class="btn btn-info btn-modal"
+            aria-describedby="modal-edit"
+            (click)="updateTrabajo(trabajo._id)"
+          >
             Actualizar
           </button>
-                        </div>
-                        <button type="button" class="btn btn-danger btn-modal" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')">
+        </div>
+        <button
+          type="button"
+          class="btn btn-danger btn-modal"
+          aria-describedby="modal-title"
+          (click)="modal.dismiss('Cross click')"
+        >
           Cerrar
         </button>
-                    </div>
-                </form>
-            </div>
-            </ng-template>
+      </div>
+    </form>
+  </div>
+</ng-template>

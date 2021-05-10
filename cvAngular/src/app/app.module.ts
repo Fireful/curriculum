@@ -2,7 +2,7 @@ import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { routing, appRoutingProviders } from './app.routing';
 import { EsParPipe } from './pipes/espar.pipe';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
@@ -31,6 +31,7 @@ import { MomentModule } from 'angular2-moment';
 import { JobNewComponent } from './components/job-new/job-new.component';
 import { MaterialModule } from './material/material.module';
 import { AngularFileUploaderModule } from 'angular-file-uploader';
+import { JobUpdateComponent } from './components/job-update/job-update.component';
 registerLocaleData(localeEs, 'es');
 
 @NgModule({
@@ -56,6 +57,7 @@ registerLocaleData(localeEs, 'es');
     EsParPipe,
     ConocimientoComponent,
     JobNewComponent,
+    JobUpdateComponent,
   ],
   imports: [
     BrowserModule,
@@ -64,6 +66,7 @@ registerLocaleData(localeEs, 'es');
     MomentModule,
     MaterialModule,
     AngularFileUploaderModule,
+    ReactiveFormsModule,
     routing,
   ],
   providers: [appRoutingProviders, { provide: LOCALE_ID, useValue: 'es' }],

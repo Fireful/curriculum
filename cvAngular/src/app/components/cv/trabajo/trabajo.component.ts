@@ -66,6 +66,7 @@ export class TrabajoComponent implements OnInit {
   fin = new FormControl();
   public experiencia: Experiencia;
   public url: string;
+  updateJob: FormGroup;
   @Input() trabajo: Experiencia;
   closeResult = '';
   public status: string;
@@ -73,7 +74,8 @@ export class TrabajoComponent implements OnInit {
 
   constructor(
     private modalService: NgbModal,
-    private _experienciaService: ExperienciaService
+    private _experienciaService: ExperienciaService,
+    private _router: Router
   ) {
     this.url = Global.url;
   }
@@ -179,7 +181,26 @@ export class TrabajoComponent implements OnInit {
     }
   }
 
-  onSubmit() {}
+  onSubmit() {
+    this._experienciaService
+      .update(this.experiencia, this.experiencia._id)
+      .subscribe(
+        (response) => {
+          if (response.status == 'success') {
+            this.status = 'success';
+            this.experiencia = response.experiencia;
+            this._router.navigate(['/cv']);
+            console.log(this.experiencia);
+          } else {
+            this.status = 'error';
+          }
+        },
+        (error) => {
+          console.log(error);
+          this.status = 'Error';
+        }
+      );
+  }
 
   ngOnInit(): void {
     this._experienciaService.getJobs().subscribe(
